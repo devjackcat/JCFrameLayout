@@ -7,8 +7,13 @@
 //
 
 #import "ViewController.h"
+#import "Masonry.h"
+
+#import "SecondViewController.h"
 
 @interface ViewController ()
+
+
 
 @end
 
@@ -16,13 +21,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    SecondViewController *vc = [[SecondViewController alloc]init];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 
