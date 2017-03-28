@@ -10,13 +10,13 @@
 
 @implementation UIView (JCFrameLayout)
 
-- (void)jc_makeLayout:(void (^)(JCFrameMaker *))block{
+- (void)jc_makeLayout:(void (^)(JCFrameMake *))block{
     //创建Frame构建器
-    JCFrameMaker *maker = [[JCFrameMaker alloc]initWithView:self];
+    JCFrameMake *make = [[JCFrameMake alloc]initWithView:self];
     //生成frame
-    block(maker);
+    block(make);
     //执行布局
-    [maker executeLayout];
+    [make executeLayout];
 }
 
 @end

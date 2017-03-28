@@ -17,6 +17,11 @@
  *  <#注释#>
  **/
 @property (nonatomic,strong) UIView *redView;
+
+/**
+ *  <#注释#>
+ **/
+@property (nonatomic,strong) UIView *greenView;
 @end
 
 @implementation SecondViewController
@@ -30,14 +35,31 @@
     self.redView.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.redView];
     
-    [self.redView jc_makeLayout:^(JCFrameMaker *maker) {
-        maker.left.jc_equalTo(@150);
-        maker.left.jc_equalTo(@50);
-        maker.top.jc_equalTo(@150);
-        maker.width.jc_equalTo(@100);
-        maker.height.jc_equalTo(@100);
-        maker.width.jc_equalTo(@50);
+    self.greenView = [[UIView alloc]init];
+    self.greenView.backgroundColor = [UIColor greenColor];
+    [self.view addSubview:self.greenView];
+    
+    [self.redView jc_makeLayout:^(JCFrameMake *make) {
+//        maker.left.jc_equalTo(@50);
+//        maker.right.jc_equalTo(@-50);
+        make.width.jc_equalTo(@100);
+        make.centerX.jc_equalTo(@200);
+        
+//        maker.top.jc_equalTo(@50);
+//        maker.bottom.jc_equalTo(@-50);
+        make.height.jc_equalTo(@100);
+        make.centerY.jc_equalTo(@200);
     }];
+    
+    [self.greenView jc_makeLayout:^(JCFrameMake *make) {
+        make.left.jc_equalTo(@50);
+        make.width.jc_equalTo(@100);
+
+        make.top.jc_equalTo(@50);
+        make.height.jc_equalTo(@100);
+    }];
+    
+    NSLog(@"self.redView.frame = %@",[NSValue valueWithCGRect:self.redView.frame]);
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

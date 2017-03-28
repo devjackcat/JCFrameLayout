@@ -16,8 +16,8 @@
 		282FD7DA1E895B5E00E17BFB /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7CD1E895B5E00E17BFB /* NSArray+MASAdditions.m */; };
 		282FD7DB1E895B5E00E17BFB /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7D01E895B5E00E17BFB /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		282FD7DC1E895B5E00E17BFB /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7D21E895B5E00E17BFB /* View+MASAdditions.m */; };
-		282FD7E71E895B6400E17BFB /* JCFrameMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7E01E895B6400E17BFB /* JCFrameMaker.m */; };
-		282FD7E81E895B6400E17BFB /* JCLayoutFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7E21E895B6400E17BFB /* JCLayoutFrame.m */; };
+		282FD7E71E895B6400E17BFB /* JCFrameMake.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7E01E895B6400E17BFB /* JCFrameMake.m */; };
+		282FD7E81E895B6400E17BFB /* JCFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7E21E895B6400E17BFB /* JCFrame.m */; };
 		282FD7E91E895B6400E17BFB /* UIView+JCFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7E41E895B6400E17BFB /* UIView+JCFrame.m */; };
 		282FD7EA1E895B6400E17BFB /* UIView+JCFrameLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7E61E895B6400E17BFB /* UIView+JCFrameLayout.m */; };
 		282FD7ED1E895B6D00E17BFB /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7EC1E895B6D00E17BFB /* SecondViewController.m */; };
@@ -54,10 +54,10 @@
 		282FD7D21E895B5E00E17BFB /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
 		282FD7D31E895B5E00E17BFB /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		282FD7DE1E895B6400E17BFB /* JCFrameLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFrameLayout.h; sourceTree = "<group>"; };
-		282FD7DF1E895B6400E17BFB /* JCFrameMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFrameMaker.h; sourceTree = "<group>"; };
-		282FD7E01E895B6400E17BFB /* JCFrameMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFrameMaker.m; sourceTree = "<group>"; };
-		282FD7E11E895B6400E17BFB /* JCLayoutFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCLayoutFrame.h; sourceTree = "<group>"; };
-		282FD7E21E895B6400E17BFB /* JCLayoutFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCLayoutFrame.m; sourceTree = "<group>"; };
+		282FD7DF1E895B6400E17BFB /* JCFrameMake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFrameMake.h; sourceTree = "<group>"; };
+		282FD7E01E895B6400E17BFB /* JCFrameMake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFrameMake.m; sourceTree = "<group>"; };
+		282FD7E11E895B6400E17BFB /* JCFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFrame.h; sourceTree = "<group>"; };
+		282FD7E21E895B6400E17BFB /* JCFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFrame.m; sourceTree = "<group>"; };
 		282FD7E31E895B6400E17BFB /* UIView+JCFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JCFrame.h"; sourceTree = "<group>"; };
 		282FD7E41E895B6400E17BFB /* UIView+JCFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JCFrame.m"; sourceTree = "<group>"; };
 		282FD7E51E895B6400E17BFB /* UIView+JCFrameLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JCFrameLayout.h"; sourceTree = "<group>"; };
@@ -74,6 +74,7 @@
 		28D22AEC1E8911C9002245F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28D22AEF1E8911C9002245F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28D22AF11E8911C9002245F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28E5EA981E8A42F300701A93 /* JCFrameLayoutConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCFrameLayoutConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,10 +122,11 @@
 			isa = PBXGroup;
 			children = (
 				282FD7DE1E895B6400E17BFB /* JCFrameLayout.h */,
-				282FD7DF1E895B6400E17BFB /* JCFrameMaker.h */,
-				282FD7E01E895B6400E17BFB /* JCFrameMaker.m */,
-				282FD7E11E895B6400E17BFB /* JCLayoutFrame.h */,
-				282FD7E21E895B6400E17BFB /* JCLayoutFrame.m */,
+				28E5EA981E8A42F300701A93 /* JCFrameLayoutConst.h */,
+				282FD7DF1E895B6400E17BFB /* JCFrameMake.h */,
+				282FD7E01E895B6400E17BFB /* JCFrameMake.m */,
+				282FD7E11E895B6400E17BFB /* JCFrame.h */,
+				282FD7E21E895B6400E17BFB /* JCFrame.m */,
 				282FD7E31E895B6400E17BFB /* UIView+JCFrame.h */,
 				282FD7E41E895B6400E17BFB /* UIView+JCFrame.m */,
 				282FD7E51E895B6400E17BFB /* UIView+JCFrameLayout.h */,
@@ -258,11 +260,11 @@
 				282FD7D71E895B5E00E17BFB /* MASLayoutConstraint.m in Sources */,
 				28D22AE21E8911C9002245F9 /* main.m in Sources */,
 				282FD7E91E895B6400E17BFB /* UIView+JCFrame.m in Sources */,
-				282FD7E71E895B6400E17BFB /* JCFrameMaker.m in Sources */,
+				282FD7E71E895B6400E17BFB /* JCFrameMake.m in Sources */,
 				282FD7DC1E895B5E00E17BFB /* View+MASAdditions.m in Sources */,
 				282FD7ED1E895B6D00E17BFB /* SecondViewController.m in Sources */,
 				282FD7EA1E895B6400E17BFB /* UIView+JCFrameLayout.m in Sources */,
-				282FD7E81E895B6400E17BFB /* JCLayoutFrame.m in Sources */,
+				282FD7E81E895B6400E17BFB /* JCFrame.m in Sources */,
 				282FD7D81E895B5E00E17BFB /* MASViewAttribute.m in Sources */,
 				282FD7D51E895B5E00E17BFB /* MASConstraint.m in Sources */,
 				282FD7D61E895B5E00E17BFB /* MASConstraintMaker.m in Sources */,

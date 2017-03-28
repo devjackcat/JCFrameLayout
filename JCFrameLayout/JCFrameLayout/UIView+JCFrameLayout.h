@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "JCFrameMaker.h"
+#import "JCFrameMake.h"
 
 @interface UIView (JCFrameLayout)
 
-- (void)jc_makeLayout:(void(^)(JCFrameMaker *maker))block;
+- (void)jc_makeLayout:(void(^)(JCFrameMake *make))block;
 
 
 
