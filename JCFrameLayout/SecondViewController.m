@@ -47,6 +47,8 @@
 //        make.top.jc_equalTo(50);
 //        make.bottom.jc_equalTo(-50);
         
+        make.left.top.width.height.jc_equalTo(100);
+        
 //        24. right and top and bottom and width
 //        make.right.jc_equalTo(-50);
 //        make.top.jc_equalTo(50);
