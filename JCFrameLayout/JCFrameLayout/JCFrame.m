@@ -27,7 +27,7 @@
 }
 
 
-- (JCFrame*(^)(id))jc_equalTo{
+- (JCFrame*(^)(id))equalTo{
     return ^id(id value){
         self->_value = value;
         return self;
@@ -45,6 +45,7 @@
 }
 
 - (NSString*)typeString{
+        
     switch (self.frameType) {
             case JCFrameTypeLeft:return @"Left"; break;
             case JCFrameTypeRight:return @"Right"; break;
@@ -54,6 +55,9 @@
             case JCFrameTypeHeight:return @"Height"; break;
             case JCFrameTypeCenterX:return @"CenterX"; break;
             case JCFrameTypeCenterY:return @"CenterY"; break;
+            case JCFrameTypeCenter:return @"Center"; break;
+            case JCFrameTypeSize:return @"Size"; break;
+            
         default:return @"UnKnow";break;
     }
 }
