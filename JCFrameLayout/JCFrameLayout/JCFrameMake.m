@@ -11,7 +11,7 @@
 
 #import "JCFrameExecutor.h"
 
-@interface JCFrameMake ()
+@interface JCFrameMake ()<JCFrameDelegate>
 
 /**
  *  <#注释#>
@@ -68,6 +68,11 @@
     return [self createJCLayoutFrame:JCFrameTypeSize];
 }
 
+#pragma mark - JCFrameDelegate
+- (JCFrame*)jcFrame:(JCFrame *)jcFrame createFrameWithframeType:(JCFrameType)frameType{
+    return [self createJCLayoutFrame:frameType];
+}
+
 - (JCFrame *)createJCLayoutFrame:(JCFrameType)frameType{
     /**
      如果这个frameType已存在，则直接返回，反之创建
@@ -78,7 +83,9 @@
         return filterResult.firstObject;
     }else{
         self.frameTypes |= frameType; //将frameType标记为已存在
-        return [[JCFrame alloc]initWithView:self.view frameType:frameType];
+        JCFrame *frame = [[JCFrame alloc]initWithView:self.view frameType:frameType];
+        frame.delegate = self;
+        return frame;
     }
 }
 
