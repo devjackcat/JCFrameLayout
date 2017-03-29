@@ -41,7 +41,7 @@
 }
 
 - (void)dealloc{
-    JCLog(@"---JCFrame dealloc %@",self.typeString);
+    JCLog(@"---JCFrame dealloc %@ , %@",self.typeString,self.value);
 }
 
 - (NSString*)typeString{

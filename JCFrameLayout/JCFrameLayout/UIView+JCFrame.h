@@ -28,5 +28,11 @@
 - (void)setJc_centerY_value:(CGFloat)value;
 - (CGFloat)jc_centerY_value;
 
+- (void)setJc_center_value:(CGPoint)value;
+- (CGPoint)jc_center_value;
+
+- (void)setJc_size_value:(CGSize)value;
+- (CGSize)jc_size_value;
+
 - (NSMutableArray *)jc_frames;
 @end

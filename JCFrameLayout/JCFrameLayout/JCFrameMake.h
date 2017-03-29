@@ -23,6 +23,8 @@
 - (JCFrame*)height;
 - (JCFrame*)centerX;
 - (JCFrame*)centerY;
+- (JCFrame*)center;
+- (JCFrame*)size;
 
 - (void)executeLayout;
 

@@ -65,6 +65,22 @@
     return self.center.y;
 }
 
+- (void)setJc_center_value:(CGPoint)value{
+    self.center = value;
+}
+- (CGPoint)jc_center_value{
+    return self.center;
+}
+
+- (void)setJc_size_value:(CGSize)value{
+    CGRect frame = self.frame;
+    frame.size = value;
+    self.frame = frame;
+}
+- (CGSize)jc_size_value{
+    return self.frame.size;
+}
+
 - (NSMutableArray *)jc_frames{
     static char key;
     NSMutableArray *array = (NSMutableArray*)objc_getAssociatedObject(self, &key);

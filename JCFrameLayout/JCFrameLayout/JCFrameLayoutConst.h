@@ -58,15 +58,17 @@ typedef NS_ENUM(NSUInteger, VerticalFrameGroupType) {
 /**
  布局类型
  */
-typedef NS_ENUM(NSUInteger, JCFrameType) {
-    JCFrameTypeLeft,
-    JCFrameTypeRight,
-    JCFrameTypeTop,
-    JCFrameTypeBottom,
-    JCFrameTypeWidth,
-    JCFrameTypeHeight,
-    JCFrameTypeCenterX,
-    JCFrameTypeCenterY
+typedef NS_OPTIONS(NSUInteger, JCFrameType) {
+    JCFrameTypeLeft = 1 << 0,
+    JCFrameTypeRight = 1 << 1,
+    JCFrameTypeTop = 1 << 2,
+    JCFrameTypeBottom = 1 << 3,
+    JCFrameTypeWidth = 1 << 4,
+    JCFrameTypeHeight = 1 << 5,
+    JCFrameTypeCenterX = 1 << 6,
+    JCFrameTypeCenterY = 1 << 7,
+    JCFrameTypeCenter = 1 << 8,
+    JCFrameTypeSize = 1 << 9
 };
 
 #endif /* JCFrameLayoutConst_h */
