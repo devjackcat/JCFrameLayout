@@ -78,6 +78,7 @@
 		28E5EA981E8A42F300701A93 /* JCFrameLayoutConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCFrameLayoutConst.h; sourceTree = "<group>"; };
 		28E5EAD31E8B84A000701A93 /* JCFrameExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFrameExecutor.h; sourceTree = "<group>"; };
 		28E5EAD41E8B84A000701A93 /* JCFrameExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFrameExecutor.m; sourceTree = "<group>"; };
+		28E5EAD61E8BB16700701A93 /* JCFrameUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFrameUtilities.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +133,7 @@
 				282FD7E21E895B6400E17BFB /* JCFrame.m */,
 				28E5EAD31E8B84A000701A93 /* JCFrameExecutor.h */,
 				28E5EAD41E8B84A000701A93 /* JCFrameExecutor.m */,
+				28E5EAD61E8BB16700701A93 /* JCFrameUtilities.h */,
 				282FD7E31E895B6400E17BFB /* UIView+JCFrame.h */,
 				282FD7E41E895B6400E17BFB /* UIView+JCFrame.m */,
 				282FD7E51E895B6400E17BFB /* UIView+JCFrameLayout.h */,

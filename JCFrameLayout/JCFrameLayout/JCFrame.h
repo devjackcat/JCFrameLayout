@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "JCFrameLayoutConst.h"
 
+#import "JCFrameUtilities.h"
 
 @interface JCFrame : NSObject
 
@@ -28,6 +29,9 @@
 
 - (instancetype)initWithView:(UIView*)view frameType:(JCFrameType)frameType;
 
+#define jc_equalTo(...)                 equalTo(JCBoxValue((__VA_ARGS__)))
+
 - (JCFrame*(^)(id))jc_equalTo;
+- (JCFrame*(^)(id))equalTo;
 
 @end
