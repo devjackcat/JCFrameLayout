@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "JCFrameLayout"
-  s.version      = "1.0.0"
-  s.summary      = "完成了left,top,right,bottom,width,height,centerX,centerY这几个属性进行组合布局."
+  s.version      = "1.1.2"
+  s.summary      = "一款采用链式语法为视图做Frame布局的工具"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-                        这是详细描述，完成了left,top,right,bottom,width,height,centerX,centerY这几个属性进行组合布局.
+                    这是详情，一款采用链式语法为视图做Frame布局的工具
                    DESC
 
   s.homepage     = "https://github.com/devjackcat/JCFrameLayout"
