@@ -14,6 +14,4 @@
 
 - (void)jc_makeLayout:(void(^)(JCFrameMake *make))block;
 
-
-
 @end

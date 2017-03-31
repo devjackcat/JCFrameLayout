@@ -9,6 +9,8 @@
 #import "UIView+JCFrame.h"
 #import <objc/runtime.h>
 
+static char debugkey;
+
 @implementation UIView (JCFrame)
 
 - (void)setJc_x_value:(CGFloat)value{
@@ -79,6 +81,47 @@
 }
 - (CGSize)jc_size_value{
     return self.frame.size;
+}
+
+
+
+- (JCFrameAttribute*)jc_left{
+    return [[JCFrameAttribute alloc]initWithView:self frameType:(JCFrameTypeLeft)];
+}
+- (JCFrameAttribute*)jc_top{
+    return [[JCFrameAttribute alloc]initWithView:self frameType:(JCFrameTypeTop)];
+}
+- (JCFrameAttribute*)jc_right{
+    return [[JCFrameAttribute alloc]initWithView:self frameType:(JCFrameTypeRight)];
+}
+- (JCFrameAttribute*)jc_bottom{
+    return [[JCFrameAttribute alloc]initWithView:self frameType:(JCFrameTypeBottom)];
+}
+- (JCFrameAttribute*)jc_width{
+    return [[JCFrameAttribute alloc]initWithView:self frameType:(JCFrameTypeWidth)];
+}
+- (JCFrameAttribute*)jc_height{
+    return [[JCFrameAttribute alloc]initWithView:self frameType:(JCFrameTypeHeight)];
+}
+- (JCFrameAttribute*)jc_centerX{
+    return [[JCFrameAttribute alloc]initWithView:self frameType:(JCFrameTypeCenterX)];
+}
+- (JCFrameAttribute*)jc_centerY{
+    return [[JCFrameAttribute alloc]initWithView:self frameType:(JCFrameTypeCenterY)];
+}
+- (JCFrameAttribute*)jc_center{
+    return [[JCFrameAttribute alloc]initWithView:self frameType:(JCFrameTypeCenter)];
+}
+- (JCFrameAttribute*)jc_size{
+    return [[JCFrameAttribute alloc]initWithView:self frameType:(JCFrameTypeSize)];
+}
+
+- (void)setJc_debug_key:(NSString *)key{
+    objc_setAssociatedObject(self, &debugkey, key, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+- (NSString *)jc_debug_key{
+    NSString *key = objc_getAssociatedObject(self, &debugkey);
+    return key ? key : @"";
 }
 
 - (NSMutableArray *)jc_frames{

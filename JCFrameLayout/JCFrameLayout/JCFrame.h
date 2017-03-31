@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "JCFrameLayoutConst.h"
 #import "JCFrameUtilities.h"
+#import "JCFrameAttribute.h"
 
 @class JCFrame;
 
@@ -23,20 +24,34 @@
 @property (nonatomic,weak) id<JCFrameDelegate> delegate;
 
 /**
- *  布局类型
- **/
-@property (nonatomic,assign,readonly) JCFrameType frameType;
-/**
  *  当前属性的值
  **/
 @property (nonatomic,strong,readonly) id value;
+/**
+ *  当前属性的偏移值，只在相对布局的时候生效
+ **/
+@property (nonatomic,strong,readonly) id offset;
+/**
+ *  当前属性的倍数，只在相对布局的时候生效
+ **/
+@property (nonatomic,assign,readonly) CGFloat multiplier;
 
 /**
- *  布局的对象UIView
+ *  是否生效，便于调试，没其他用处
  **/
-@property (nonatomic,weak,readonly) UIView *view;
+@property (nonatomic,assign) BOOL actived;
+/**
+ *  是否有相对属性
+ **/
+@property (nonatomic,assign,readonly) BOOL hasRelateAttr;
 
-- (instancetype)initWithView:(UIView*)view frameType:(JCFrameType)frameType;
+/**
+ *  布局属性
+ **/
+@property (nonatomic,strong,strong) JCFrameAttribute *frameAttr;
+
+
+- (instancetype)initWithFrameAttribute:(JCFrameAttribute*)frameAttribute;
 
 
 - (JCFrame*)left;
@@ -51,8 +66,11 @@
 - (JCFrame*)size;
 
 #define jc_equalTo(...)                 equalTo(JCBoxValue((__VA_ARGS__)))
+#define jc_offset(...)                 jc_offset(JCBoxValue((__VA_ARGS__)))
 
 - (JCFrame*(^)(id))jc_equalTo;
 - (JCFrame*(^)(id))equalTo;
+- (JCFrame*(^)(CGFloat))multipliedBy;
+- (JCFrame*(^)(id))jc_offset;
 
 @end

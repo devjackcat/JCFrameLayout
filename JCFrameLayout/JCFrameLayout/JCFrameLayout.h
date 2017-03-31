@@ -10,5 +10,6 @@
 #define JCFrameLayout_h
 
 #import "UIView+JCFrameLayout.h"
+#import "UIView+JCFrame.h"
 
 #endif /* JCFrameLayout_h */

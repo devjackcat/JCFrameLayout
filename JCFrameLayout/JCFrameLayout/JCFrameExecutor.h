@@ -14,7 +14,6 @@
 @interface JCFrameExecutor : NSObject
 
 + (void)executeWithView:(UIView*)view
-                 frames:(NSArray<JCFrame*>*)frames
              frameTypes:(JCFrameType)frameTypes;
 
 @end

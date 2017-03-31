@@ -74,25 +74,43 @@
 }
 
 - (JCFrame *)createJCLayoutFrame:(JCFrameType)frameType{
-    /**
-     如果这个frameType已存在，则直接返回，反之创建
-     */
+
     if (self.frameTypes & frameType) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"frameType=%d",frameType];
+        /**
+         如果这个frameType已存在，则直接返回，反之创建
+         */
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(JCFrame *frame, id obj) {
+            return frame.frameAttr.currentFrameType == frameType;
+        }];
         NSArray *filterResult = [self.view.jc_frames filteredArrayUsingPredicate:predicate];
         return filterResult.firstObject;
+        
     }else{
-        self.frameTypes |= frameType; //将frameType标记为已存在
-        JCFrame *frame = [[JCFrame alloc]initWithView:self.view frameType:frameType];
+        
+        //1.将frameType标记为已存在
+        self.frameTypes |= frameType;
+        
+        //2.创建JCFrameAttribute
+        JCFrameAttribute *frameAttribute = [[JCFrameAttribute alloc]initWithView:self.view frameType:frameType];
+        
+        //3.创建JCFrame
+        JCFrame *frame = [[JCFrame alloc]initWithFrameAttribute:frameAttribute];
+        
+        //4.设置JCFrame代理
         frame.delegate = self;
+        
+        //5.将JCFrame添加至UIView的jc_frames集合中
+        [self.view.jc_frames addObject:frame];
+        
         return frame;
     }
 }
 
 - (void)executeLayout{
     [JCFrameExecutor executeWithView:self.view
-                              frames:self.view.jc_frames
                           frameTypes:self.frameTypes];
+    JCLog(@"--frames = %@",self.view.jc_frames);
+
 }
 
 - (void)dealloc{

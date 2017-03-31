@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "JCFrameAttribute.h"
+
 @interface UIView (JCFrame)
 
 - (void)setJc_x_value:(CGFloat)value;
@@ -34,5 +36,21 @@
 - (void)setJc_size_value:(CGSize)value;
 - (CGSize)jc_size_value;
 
+
+- (JCFrameAttribute*)jc_left;
+- (JCFrameAttribute*)jc_top;
+- (JCFrameAttribute*)jc_right;
+- (JCFrameAttribute*)jc_bottom;
+- (JCFrameAttribute*)jc_width;
+- (JCFrameAttribute*)jc_height;
+- (JCFrameAttribute*)jc_centerX;
+- (JCFrameAttribute*)jc_centerY;
+- (JCFrameAttribute*)jc_center;
+- (JCFrameAttribute*)jc_size;
+
+//给UIView设置一个key值，用于方便调试
+@property (nonatomic,copy) NSString *jc_debug_key;
+
 - (NSMutableArray *)jc_frames;
+
 @end

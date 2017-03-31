@@ -21,6 +21,7 @@
 		282FD7E91E895B6400E17BFB /* UIView+JCFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7E41E895B6400E17BFB /* UIView+JCFrame.m */; };
 		282FD7EA1E895B6400E17BFB /* UIView+JCFrameLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7E61E895B6400E17BFB /* UIView+JCFrameLayout.m */; };
 		282FD7ED1E895B6D00E17BFB /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282FD7EC1E895B6D00E17BFB /* SecondViewController.m */; };
+		2836F33C1E8CE49400C9BE35 /* JCFrameAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 2836F33B1E8CE49400C9BE35 /* JCFrameAttribute.m */; };
 		28D22AE21E8911C9002245F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D22AE11E8911C9002245F9 /* main.m */; };
 		28D22AE51E8911C9002245F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D22AE41E8911C9002245F9 /* AppDelegate.m */; };
 		28D22AE81E8911C9002245F9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D22AE71E8911C9002245F9 /* ViewController.m */; };
@@ -65,6 +66,8 @@
 		282FD7E61E895B6400E17BFB /* UIView+JCFrameLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JCFrameLayout.m"; sourceTree = "<group>"; };
 		282FD7EB1E895B6D00E17BFB /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		282FD7EC1E895B6D00E17BFB /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		2836F33A1E8CE49400C9BE35 /* JCFrameAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFrameAttribute.h; sourceTree = "<group>"; };
+		2836F33B1E8CE49400C9BE35 /* JCFrameAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFrameAttribute.m; sourceTree = "<group>"; };
 		28D22ADD1E8911C9002245F9 /* JCFrameLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JCFrameLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D22AE11E8911C9002245F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28D22AE31E8911C9002245F9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				282FD7E01E895B6400E17BFB /* JCFrameMake.m */,
 				282FD7E11E895B6400E17BFB /* JCFrame.h */,
 				282FD7E21E895B6400E17BFB /* JCFrame.m */,
+				2836F33A1E8CE49400C9BE35 /* JCFrameAttribute.h */,
+				2836F33B1E8CE49400C9BE35 /* JCFrameAttribute.m */,
 				28E5EAD31E8B84A000701A93 /* JCFrameExecutor.h */,
 				28E5EAD41E8B84A000701A93 /* JCFrameExecutor.m */,
 				28E5EAD61E8BB16700701A93 /* JCFrameUtilities.h */,
@@ -264,6 +269,7 @@
 				282FD7DA1E895B5E00E17BFB /* NSArray+MASAdditions.m in Sources */,
 				28D22AE81E8911C9002245F9 /* ViewController.m in Sources */,
 				28D22AE51E8911C9002245F9 /* AppDelegate.m in Sources */,
+				2836F33C1E8CE49400C9BE35 /* JCFrameAttribute.m in Sources */,
 				282FD7D71E895B5E00E17BFB /* MASLayoutConstraint.m in Sources */,
 				28D22AE21E8911C9002245F9 /* main.m in Sources */,
 				282FD7E91E895B6400E17BFB /* UIView+JCFrame.m in Sources */,
