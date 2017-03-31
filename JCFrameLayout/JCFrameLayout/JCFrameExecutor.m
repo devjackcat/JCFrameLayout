@@ -56,11 +56,11 @@ CGFloat rightX = 0;\
     JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];\
     if (right.hasRelateAttr) {\
         if (right.frameAttr.relateFrameType == JCFrameTypeLeft) {\
-            rightX = right.frameAttr.relateView.jc_y_value;\
+            rightX = right.frameAttr.relateView.jc_x_value;\
         }else if (right.frameAttr.relateFrameType == JCFrameTypeCenterX) {\
-            rightX = right.frameAttr.relateView.jc_centerY_value;\
+            rightX = right.frameAttr.relateView.jc_centerX_value;\
         }else if (right.frameAttr.relateFrameType == JCFrameTypeRight) {\
-            rightX = right.frameAttr.relateView.jc_bottom_value;\
+            rightX = right.frameAttr.relateView.jc_right_value;\
         }\
         rightX = rightX * right.multiplier + ((NSNumber*)right.offset).doubleValue;\
     }else{\
@@ -94,7 +94,7 @@ CGFloat bottomY = 0;\
     JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];\
     if (bottom.hasRelateAttr) {\
         if (bottom.frameAttr.relateFrameType == JCFrameTypeTop) {\
-            bottomY = bottom.frameAttr.relateView.jc_x_value;\
+            bottomY = bottom.frameAttr.relateView.jc_y_value;\
         }else if (bottom.frameAttr.relateFrameType == JCFrameTypeCenterY) {\
             bottomY = bottom.frameAttr.relateView.jc_centerY_value;\
         }else if (bottom.frameAttr.relateFrameType == JCFrameTypeBottom) {\
@@ -344,6 +344,8 @@ setCenterByCenterFrame(view,center);\
         
         NSArray<JCFrame*>*frames = view.jc_frames;
         
+        JCLog(@"\n---%@--layoutByCenterAndSize\n",view.jc_debug_key);
+        
         //1. 先size
         SET_SIZE
         
@@ -365,6 +367,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeHeight)) {
         
         NSArray<JCFrame*>*frames = view.jc_frames;
+        
+        JCLog(@"\n---%@--layoutByCenterAndWidthAndHeight\n",view.jc_debug_key);
         
         //1. 设置宽度
         SET_WIDTH
@@ -392,6 +396,8 @@ setCenterByCenterFrame(view,center);\
         
         NSArray<JCFrame*>*frames = view.jc_frames;
         
+        JCLog(@"\n---%@--layoutByCenterXAndCenterYAndSize\n",view.jc_debug_key);
+        
         //1. 设置size
         SET_SIZE
         
@@ -415,6 +421,8 @@ setCenterByCenterFrame(view,center);\
         
         NSArray<JCFrame*>*frames = view.jc_frames;
         
+        JCLog(@"\n---%@--layoutByCenterXAndTopAndSize\n",view.jc_debug_key);
+        
         //1. size
         SET_SIZE
         
@@ -437,6 +445,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeSize)) {
         
+        JCLog(@"\n---%@--layoutByCenterXAndBottomAndSize\n",view.jc_debug_key);
+        
         //1. size
         SET_SIZE
         
@@ -457,6 +467,8 @@ setCenterByCenterFrame(view,center);\
     if ((frameTypes & JCFrameTypeCenterY)
         &&(frameTypes & JCFrameTypeLeft)
         &&(frameTypes & JCFrameTypeSize)) {
+        
+        JCLog(@"\n---%@--layoutByCenterYAndLeftAndSize\n",view.jc_debug_key);
         
         NSArray<JCFrame*>*frames = view.jc_frames;
         
@@ -481,6 +493,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeRight)
         &&(frameTypes & JCFrameTypeSize)) {
         
+        JCLog(@"\n---%@--layoutByCenterYAndRightAndSize\n",view.jc_debug_key);
+        
         //1. size
         SET_SIZE
         
@@ -503,6 +517,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeTop)
         &&(frameTypes & JCFrameTypeSize)) {
         
+        JCLog(@"\n---%@--layoutByLeftAndTopAndSize\n",view.jc_debug_key);
+        
         //1. size
         SET_SIZE
         
@@ -523,6 +539,8 @@ setCenterByCenterFrame(view,center);\
     if ((frameTypes & JCFrameTypeLeft)
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeSize)) {
+        
+        JCLog(@"\n---%@--layoutByLeftAndBottomAndSize\n",view.jc_debug_key);
         
         //1. size
         SET_SIZE
@@ -547,6 +565,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeTop)
         &&(frameTypes & JCFrameTypeSize)) {
         
+        JCLog(@"\n---%@--layoutByRightAndTopAndSize\n",view.jc_debug_key);
+        
         //1. size
         SET_SIZE
         
@@ -567,6 +587,8 @@ setCenterByCenterFrame(view,center);\
     if ((frameTypes & JCFrameTypeRight)
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeSize)) {
+        
+        JCLog(@"\n---%@--layoutByRightAndBottomAndSize\n",view.jc_debug_key);
         
         //1. size
         SET_SIZE
@@ -592,6 +614,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeCenterY)
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
+        
+        JCLog(@"\n---%@--layoutByCenterXAndCenterYAndWidthAndHeight\n",view.jc_debug_key);
         
         //1. width
         SET_WIDTH
@@ -621,6 +645,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
+        JCLog(@"\n---%@--layoutByCenterXAndTopAndWidthAndHeight\n",view.jc_debug_key);
+        
         //1. width
         SET_WIDTH
         
@@ -648,6 +674,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
+        
+        JCLog(@"\n---%@--layoutByCenterXAndBottomAndWidthAndHeight\n",view.jc_debug_key);
         
         //1. width
         SET_WIDTH
@@ -677,6 +705,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
+        JCLog(@"\n---%@--layoutByCenterYAndLeftAndWidthAndHeight\n",view.jc_debug_key);
+        
         //1. width
         SET_WIDTH
         
@@ -704,6 +734,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeRight)
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
+        
+        JCLog(@"\n---%@--layoutByCenterYAndRightAndWidthAndHeight\n",view.jc_debug_key);
         
         //1. width
         SET_WIDTH
@@ -734,6 +766,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
+        JCLog(@"\n---%@--layoutByLeftAndTopAndWidthAndHeight\n",view.jc_debug_key);
+        
         //1. width
         SET_WIDTH
         
@@ -760,6 +794,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
+        
+        JCLog(@"\n---%@--layoutByLeftAndBottomAndWidthAndHeight\n",view.jc_debug_key);
         
         //1. width
         SET_WIDTH
@@ -790,6 +826,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
+        JCLog(@"\n---%@--layoutByRightAndTopAndWidthAndHeight\n",view.jc_debug_key);
+        
         //1. width
         SET_WIDTH
         
@@ -816,6 +854,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
+        
+        JCLog(@"\n---%@--layoutByRightAndBottomAndWidthAndHeight\n",view.jc_debug_key);
         
         //1. width
         SET_WIDTH
@@ -848,6 +888,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeTop)
         &&(frameTypes & JCFrameTypeHeight)) {
         
+        JCLog(@"\n---%@--layoutByLeftAndRightAndTopAndHeight\n",view.jc_debug_key);
+        
         //1. height
         SET_HEIGHT
         
@@ -873,6 +915,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeRight)
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeHeight)) {
+        
+        JCLog(@"\n---%@--layoutByLeftAndRightAndBottomAndHeight\n",view.jc_debug_key);
         
         //1. height
         SET_HEIGHT
@@ -900,6 +944,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeWidth)) {
         
+        JCLog(@"\n---%@--layoutByLeftAndTopAndBottomAndWidth\n",view.jc_debug_key);
+        
         //1. width
         SET_WIDTH
         
@@ -924,6 +970,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeTop)
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeWidth)) {
+        
+        JCLog(@"\n---%@--layoutByRightAndTopAndBottomAndWidth\n",view.jc_debug_key);
         
         //1. width
         SET_WIDTH
@@ -952,6 +1000,8 @@ setCenterByCenterFrame(view,center);\
         &&(frameTypes & JCFrameTypeTop)
         &&(frameTypes & JCFrameTypeBottom)) {
         
+        JCLog(@"\n---%@--layoutByLeftAndRightAndTopAndBottom\n",view.jc_debug_key);
+        
         //1. left and right
         SET_LEFT_RIGHT
         
@@ -961,7 +1011,6 @@ setCenterByCenterFrame(view,center);\
         return YES;
     }
 
-    
     return NO;
 
 }

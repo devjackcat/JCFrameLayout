@@ -203,7 +203,7 @@ void setTopByTopFrame(UIView*view,JCFrame*frame){
         //设置
         view.jc_y_value = newTop;
     }else{
-        view.jc_y_value = ((NSNumber*)frame).doubleValue;
+        view.jc_y_value = ((NSNumber*)frame.value).doubleValue;
     }
 }
 

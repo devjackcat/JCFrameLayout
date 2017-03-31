@@ -1,11 +1,30 @@
-# JCFrameLayout
+//
+//  ExampleVC1.m
+//  JCFrameLayout
+//
+//  Created by abc on 17/3/31.
+//  Copyright © 2017年 jackcat. All rights reserved.
+//
 
-JCFrameLayout是一个类似Masonry的布局工具，与Masonry不同的是JCFrameLayout采用的是Frame布局而非约束布局，实现了Masonry大部分功能。
+#import "ExampleVC1.h"
 
-### 使用方式
-例如一下代码实现效果：
-```
-UIView *leftView = [[UIView alloc]init];
+#import "JCFrameLayout.h"
+
+
+#define radomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0  blue:arc4random_uniform(256)/255.0  alpha:1]
+
+@interface ExampleVC1 ()
+
+@end
+
+@implementation ExampleVC1
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIView *leftView = [[UIView alloc]init];
     leftView.backgroundColor = radomColor;
     [self.view addSubview:leftView];
     leftView.jc_debug_key = @"leftView";
@@ -61,69 +80,9 @@ UIView *leftView = [[UIView alloc]init];
         make.right.equalTo(rightView.jc_left);
         make.bottom.equalTo(bottomView.jc_top);
     }];
+    NSLog(@"centerView.frame = %@",[NSValue valueWithCGRect:centerView.frame]);
     [self.view sendSubviewToBack:centerView];
-```
+    
+}
 
-
-### 历史版本
-
-#### V2.0.0
-实现多视图的相对布局
-```
-[centerView jc_makeLayout:^(JCFrameMake *make) {
-        make.left.equalTo(leftView.jc_right);
-        make.top.equalTo(topView.jc_bottom);
-        make.right.equalTo(rightView.jc_left);
-        make.bottom.equalTo(bottomView.jc_top);
-    }];
-```
-
-#### V1.1.2
-完善了单视图的链式语法，可以实现这样的的效果
-
-```
-[self.redView jc_makeLayout:^(JCFrameMake *make) {
-        make.left.top.width.height.jc_equalTo(100);
-    }];
-```
-
-#### V1.1.1
-jc_equalTo()时自动将基本类型进行装箱
-
-可以将V1.1.0的代码简化为：
-
-```
-[self.redView jc_makeLayout:^(JCFrameMake *make) {
-        make.center.jc_equalTo(CGPointMake(100, 100));
-        make.size.jc_equalTo(CGSizeMake(100, 100));
-    }];
-```
-
-#### V1.1.0
-增加了center,size两个复合属性的支持
-
-```
-[self.redView jc_makeLayout:^(JCFrameMake *make) {
-        make.center.jc_equalTo([NSValue valueWithCGPoint:CGPointMake(100, 100)]);
-        make.size.jc_equalTo([NSValue valueWithCGSize:CGSizeMake(100, 100)]);
-}];
-```
-
-#### V1.0.0
-实现了单视图的基本布局，支持6个布局属性left,top,width,height,centerX,centerY，可以链式语法还支持不完善，下面是布局的一个例子：
-
-```
-[self.redView jc_makeLayout:^(JCFrameMake *make) {
-        make.left.jc_equalTo(@50);
-        make.top.jc_equalTo(@50);
-        make.width.jc_equalTo(@100);
-        make.height.jc_equalTo(@100);
-    }];
-```
-
-
-### 期望
-
-* 发现Bug请在Issues提出，或者邮件告知我，我将尽快修复
-* 如果觉得有用，请给我个Star
-
+@end
