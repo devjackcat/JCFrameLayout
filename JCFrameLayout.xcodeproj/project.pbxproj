@@ -39,7 +39,6 @@
 		282FD7E61E895B6400E17BFB /* UIView+JCFrameLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JCFrameLayout.m"; sourceTree = "<group>"; };
 		2836F33A1E8CE49400C9BE35 /* JCFrameAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFrameAttribute.h; sourceTree = "<group>"; };
 		2836F33B1E8CE49400C9BE35 /* JCFrameAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFrameAttribute.m; sourceTree = "<group>"; };
-		2836F33D1E8E2FEA00C9BE35 /* JCFrameExecutorMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCFrameExecutorMethods.h; sourceTree = "<group>"; };
 		2836F33F1E8E3DBA00C9BE35 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		2836F3401E8E3DBA00C9BE35 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		2836F3421E8E3DE900C9BE35 /* ExampleVC1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleVC1.h; sourceTree = "<group>"; };
@@ -93,7 +92,6 @@
 				2836F33B1E8CE49400C9BE35 /* JCFrameAttribute.m */,
 				28E5EAD31E8B84A000701A93 /* JCFrameExecutor.h */,
 				28E5EAD41E8B84A000701A93 /* JCFrameExecutor.m */,
-				2836F33D1E8E2FEA00C9BE35 /* JCFrameExecutorMethods.h */,
 				282FD7E31E895B6400E17BFB /* UIView+JCFrame.h */,
 				282FD7E41E895B6400E17BFB /* UIView+JCFrame.m */,
 				282FD7E51E895B6400E17BFB /* UIView+JCFrameLayout.h */,
