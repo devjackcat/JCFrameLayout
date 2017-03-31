@@ -9,7 +9,7 @@
 #ifndef JCFrameLayoutConst_h
 #define JCFrameLayoutConst_h
 
-//#define NOLOG 1
+#define NOLOG 1
 
 #ifdef NOLOG
 #define JCLog( s,...)

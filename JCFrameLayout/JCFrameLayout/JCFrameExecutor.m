@@ -10,28 +10,135 @@
 
 #import "UIView+JCFrame.h"
 
+#import "JCFrameExecutorMethods.h"
 
-/**
- 根据relateCenter、multiplier、offset计算新的CGPoint
- */
-CGPoint transToNewCenter(CGPoint relateCenter,CGFloat multiplier,id offset){
-    CGFloat offsetX = [offset CGPointValue].x;
-    CGFloat offsetY = [offset CGPointValue].y;
-    CGFloat newCenterX = relateCenter.x * multiplier + offsetX;
-    CGFloat newCenterY = relateCenter.y * multiplier + offsetY;
-    return CGPointMake(newCenterX, newCenterY);
+#define SET_LEFT {\
+JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];\
+setLeftByLeftFrame(view, left);\
 }
 
-/**
- 根据relateCenter、multiplier、offset计算新的CGSize
- */
-CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
-    CGFloat offsetWidth = [offset CGSizeValue].width;
-    CGFloat offsetHeight = [offset CGSizeValue].height;
-    CGFloat newWidth = relateSize.width * multiplier + offsetWidth;
-    CGFloat newHeight = relateSize.height * multiplier + offsetHeight;
-    return CGSizeMake(newWidth, newHeight);
+#define SET_TOP {\
+JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];\
+setTopByTopFrame(view, top);\
 }
+
+#define SET_RIGHT {\
+JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];\
+setRightByRightFrame(view, right);\
+}
+
+#define SET_BOTTOM  {\
+JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];\
+setBottomByBottomFrame(view, bottom);\
+}
+
+#define SET_LEFT_RIGHT {\
+CGFloat leftX = 0;\
+CGFloat rightX = 0;\
+{\
+    JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];\
+    if (left.hasRelateAttr) {\
+        if (left.frameAttr.relateFrameType == JCFrameTypeLeft) {\
+            leftX = left.frameAttr.relateView.jc_x_value;\
+        }else if (left.frameAttr.relateFrameType == JCFrameTypeCenterX) {\
+            leftX = left.frameAttr.relateView.jc_centerX_value;\
+        }else if (left.frameAttr.relateFrameType == JCFrameTypeRight) {\
+            leftX = left.frameAttr.relateView.jc_right_value;\
+        }\
+        leftX = leftX * left.multiplier + ((NSNumber*)left.offset).doubleValue;\
+    }else{\
+        leftX = ((NSNumber*)left.value).doubleValue;\
+    }\
+    left.jc_equalTo(leftX);\
+    view.jc_x_value = leftX;\
+}\
+{\
+    JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];\
+    if (right.hasRelateAttr) {\
+        if (right.frameAttr.relateFrameType == JCFrameTypeLeft) {\
+            rightX = right.frameAttr.relateView.jc_y_value;\
+        }else if (right.frameAttr.relateFrameType == JCFrameTypeCenterX) {\
+            rightX = right.frameAttr.relateView.jc_centerY_value;\
+        }else if (right.frameAttr.relateFrameType == JCFrameTypeRight) {\
+            rightX = right.frameAttr.relateView.jc_bottom_value;\
+        }\
+        rightX = rightX * right.multiplier + ((NSNumber*)right.offset).doubleValue;\
+    }else{\
+        rightX = view.superview.jc_width_value + ((NSNumber*)right.value).doubleValue;\
+    }\
+}\
+view.jc_width_value = rightX/*右边X*/ - leftX/*左边X*/;\
+}
+
+#define SET_TOP_BOTTOM {\
+CGFloat topY = 0;\
+CGFloat bottomY = 0;\
+{\
+    JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];\
+    if (top.hasRelateAttr) {\
+        if (top.frameAttr.relateFrameType == JCFrameTypeTop) {\
+            topY = top.frameAttr.relateView.jc_y_value;\
+        }else if (top.frameAttr.relateFrameType == JCFrameTypeCenterY) {\
+            topY = top.frameAttr.relateView.jc_centerY_value;\
+        }else if (top.frameAttr.relateFrameType == JCFrameTypeBottom) {\
+            topY = top.frameAttr.relateView.jc_bottom_value;\
+        }\
+        topY = topY * top.multiplier + ((NSNumber*)top.offset).doubleValue;\
+    }else{\
+        topY = ((NSNumber*)top.value).doubleValue;\
+    }\
+    top.jc_equalTo(topY);\
+    view.jc_y_value = topY;\
+}\
+{\
+    JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];\
+    if (bottom.hasRelateAttr) {\
+        if (bottom.frameAttr.relateFrameType == JCFrameTypeTop) {\
+            bottomY = bottom.frameAttr.relateView.jc_x_value;\
+        }else if (bottom.frameAttr.relateFrameType == JCFrameTypeCenterY) {\
+            bottomY = bottom.frameAttr.relateView.jc_centerY_value;\
+        }else if (bottom.frameAttr.relateFrameType == JCFrameTypeBottom) {\
+            bottomY = bottom.frameAttr.relateView.jc_bottom_value;\
+        }\
+        bottomY = bottomY * bottom.multiplier + ((NSNumber*)bottom.offset).doubleValue;\
+    }else{\
+        bottomY = view.superview.jc_height_value/*父容器高度*/ + ((NSNumber*)bottom.value).doubleValue/*底边距*/;\
+    }\
+}\
+view.jc_height_value = bottomY - topY;\
+}
+
+#define SET_CENTER_X {\
+JCFrame *centerX = [self filterFrameIn:frames frameType:(JCFrameTypeCenterX)];\
+setCenterXByCenterXFrame(view, centerX);\
+}
+
+#define SET_CENTER_Y {\
+JCFrame *centerY = [self filterFrameIn:frames frameType:(JCFrameTypeCenterY)];\
+setCenterYByCenterYFrame(view, centerY);\
+}
+
+#define SET_WIDTH {\
+JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];\
+setWidthByWidthFrame(view, width);\
+}
+
+#define SET_HEIGHT {\
+JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];\
+setHeightByHeightFrame(view, height);\
+}
+
+#define SET_SIZE { \
+JCFrame *size = [self filterFrameIn:frames frameType:(JCFrameTypeSize)]; \
+setSizeBySizeFrame(view, size); \
+}
+
+#define SET_CENTER {\
+JCFrame *center = [self filterFrameIn:frames frameType:(JCFrameTypeCenter)];\
+setCenterByCenterFrame(view,center);\
+}
+
+
 
 @implementation JCFrameExecutor
 
@@ -237,41 +344,11 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         
         NSArray<JCFrame*>*frames = view.jc_frames;
         
-        JCLog(@"--view = %@",view.jc_debug_key);
-        
-        JCFrame *center = [self filterFrameIn:frames frameType:(JCFrameTypeCenter)];
-        JCFrame *size = [self filterFrameIn:frames frameType:(JCFrameTypeSize)];
-        
         //1. 先size
-        if (size.hasRelateAttr) {
-            //size的相对值只能是size
-            if (size.frameAttr.relateFrameType == JCFrameTypeSize) {
-                //1.1 计算新的size
-                CGSize newSize = transToNewSize(size.frameAttr.relateView.jc_size_value,size.multiplier,size.offset);
-                //2. 新值回填
-                view.jc_size_value = newSize;
-                //3. 设置新值
-                size.jc_equalTo(newSize);
-            }
-        }else{
-            view.jc_size_value = ((NSValue*)size.value).CGSizeValue;
-        }
+        SET_SIZE
         
         //2. 后Center
-        if (center.hasRelateAttr) {
-            //center的相对值只能是center
-            if(center.frameAttr.relateFrameType == JCFrameTypeCenter){
-                //1. 根据multiplier和offset获取新的center
-                CGPoint newCenter = transToNewCenter(center.frameAttr.relateView.jc_center_value,center.multiplier,center.offset);
-                //2. 将新的值回填回去，因为center的value属性赋值
-                center.jc_equalTo(newCenter);
-                //3. 设置新值
-                view.jc_center_value = newCenter;
-                
-            }
-        }else{
-            view.jc_center_value = ((NSValue*)center.value).CGPointValue;
-        }
+        SET_CENTER
         
         return YES;
     }
@@ -290,50 +367,14 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         NSArray<JCFrame*>*frames = view.jc_frames;
         
         //1. 设置宽度
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
-        if (width.hasRelateAttr) {
-            if(width.frameAttr.relateFrameType == JCFrameTypeWidth){
-                //view2.width * 倍数 + 偏移量
-                CGFloat newWidth = width.frameAttr.relateView.jc_width_value * width.multiplier + ((NSNumber*)width.offset).doubleValue;
-                //回填
-                width.jc_equalTo(newWidth);
-                //设置
-                view.jc_width_value = newWidth;
-            }
-        }else{
-            view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        }
+        SET_WIDTH
         
         //2. 设置高度
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
-        if (height.hasRelateAttr) {
-            //height只能相对height
-            if(height.frameAttr.relateFrameType == JCFrameTypeHeight){
-                //计算新值
-                CGFloat newHeight = height.frameAttr.relateView.jc_height_value * height.multiplier + ((NSNumber*)height.offset).doubleValue;
-                //回填
-                height.jc_equalTo(newHeight);
-                //设置
-                view.jc_height_value = newHeight;
-            }
-        }else{
-            view.jc_height_value = ((NSNumber*)height.value).doubleValue;
-        }
+        SET_HEIGHT
+        
         
         //3. 设置center
-        JCFrame *center = [self filterFrameIn:frames frameType:(JCFrameTypeCenter)];
-        if (center.hasRelateAttr) {
-            if (center.frameAttr.relateFrameType == JCFrameTypeCenter) {
-                //计算新值
-                CGPoint newCenter = transToNewCenter(center.frameAttr.relateView.jc_center_value, center.multiplier, center.offset);
-                //回填
-                center.jc_equalTo(newCenter);
-                //设置
-                view.jc_center_value = newCenter;
-            }
-        }else{
-            view.jc_center_value = ((NSValue*)center.value).CGPointValue;
-        }
+        SET_CENTER
         
         return YES;
     }
@@ -351,12 +392,15 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         
         NSArray<JCFrame*>*frames = view.jc_frames;
         
-        JCFrame *centerX = [self filterFrameIn:frames frameType:(JCFrameTypeCenterX)];
-        JCFrame *centerY = [self filterFrameIn:frames frameType:(JCFrameTypeCenterY)];
-        JCFrame *size = [self filterFrameIn:frames frameType:(JCFrameTypeSize)];
-        view.jc_centerX_value = ((NSNumber*)centerX.value).doubleValue;
-        view.jc_centerY_value = ((NSNumber*)centerY.value).doubleValue;
-        view.jc_size_value = ((NSValue*)size.value).CGSizeValue;
+        //1. 设置size
+        SET_SIZE
+        
+        //2. 设置centerX
+        SET_CENTER_X
+        
+        //3. 设置centerY
+        SET_CENTER_Y
+        
         return YES;
     }
     
@@ -371,13 +415,15 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         
         NSArray<JCFrame*>*frames = view.jc_frames;
         
-        JCFrame *centerX = [self filterFrameIn:frames frameType:(JCFrameTypeCenterX)];
-        JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];
-        JCFrame *size = [self filterFrameIn:frames frameType:(JCFrameTypeSize)];
+        //1. size
+        SET_SIZE
         
-        view.jc_size_value = ((NSValue*)size.value).CGSizeValue;
-        view.jc_y_value = ((NSNumber*)top.value).doubleValue;
-        view.jc_centerX_value = ((NSNumber*)centerX.value).doubleValue;
+        //2. top
+        SET_TOP
+        
+        //3. centerX
+        SET_CENTER_X
+        
         
         return YES;
     }
@@ -391,13 +437,14 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeSize)) {
         
-        JCFrame *centerX = [self filterFrameIn:frames frameType:(JCFrameTypeCenterX)];
-        JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];
-        JCFrame *size = [self filterFrameIn:frames frameType:(JCFrameTypeSize)];
+        //1. size
+        SET_SIZE
         
-        view.jc_size_value = ((NSValue*)size.value).CGSizeValue;
-        view.jc_centerX_value = ((NSNumber*)centerX.value).doubleValue;
-        view.jc_y_value = view.superview.jc_height_value/*父容器高度*/ - view.jc_height_value/*高度*/ + ((NSNumber*)bottom.value).doubleValue/*距离父容器底边距，一般为负数*/;
+        //2. centerX
+        SET_CENTER_X
+        
+        //3. bottom
+       SET_BOTTOM
         
         return NO;
     }
@@ -405,18 +452,22 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
 }
 
 //      6. centerY and left and size
-+ (BOOL)layoutByCenterYAndLeftAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{NSArray<JCFrame*>*frames = view.jc_frames;
++ (BOOL)layoutByCenterYAndLeftAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{
+    
     if ((frameTypes & JCFrameTypeCenterY)
         &&(frameTypes & JCFrameTypeLeft)
         &&(frameTypes & JCFrameTypeSize)) {
         
-        JCFrame *centerY = [self filterFrameIn:frames frameType:(JCFrameTypeCenterY)];
-        JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];
-        JCFrame *size = [self filterFrameIn:frames frameType:(JCFrameTypeSize)];
+        NSArray<JCFrame*>*frames = view.jc_frames;
         
-        view.jc_size_value = ((NSValue*)size.value).CGSizeValue;
-        view.jc_x_value = ((NSNumber*)left.value).doubleValue;
-        view.jc_y_value = ((NSNumber*)centerY.value).doubleValue - view.jc_height_value/2;
+        //1. size
+        SET_SIZE
+        
+        //2. centerY
+        SET_CENTER_Y
+        
+        //3. left
+        SET_LEFT
         
         return YES;
     }
@@ -430,13 +481,14 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeRight)
         &&(frameTypes & JCFrameTypeSize)) {
         
-        JCFrame *centerY = [self filterFrameIn:frames frameType:(JCFrameTypeCenterY)];
-        JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];
-        JCFrame *size = [self filterFrameIn:frames frameType:(JCFrameTypeSize)];
+        //1. size
+        SET_SIZE
         
-        view.jc_size_value = ((NSValue*)size.value).CGSizeValue;
-        view.jc_y_value = ((NSNumber*)centerY.value).doubleValue - view.jc_height_value/2;
-        view.jc_x_value = view.superview.jc_width_value/*父容器宽度*/-view.jc_width_value/*宽度*/+((NSNumber*)right.value).doubleValue/*右边距，负数*/;
+        //2. centerY
+        SET_CENTER_Y
+        
+        //3. right
+        SET_RIGHT
         
         return YES;
     }
@@ -451,13 +503,14 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeTop)
         &&(frameTypes & JCFrameTypeSize)) {
         
-        JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];
-        JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];
-        JCFrame *size = [self filterFrameIn:frames frameType:(JCFrameTypeSize)];
+        //1. size
+        SET_SIZE
         
-        view.jc_size_value = ((NSValue*)size.value).CGSizeValue;
-        view.jc_y_value = ((NSNumber*)top.value).doubleValue;
-        view.jc_x_value = ((NSNumber*)left.value).doubleValue;
+        //2. left
+        SET_LEFT
+        
+        //3. top
+        SET_TOP
         
         return YES;
     }
@@ -471,13 +524,14 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeSize)) {
         
-        JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];
-        JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];
-        JCFrame *size = [self filterFrameIn:frames frameType:(JCFrameTypeSize)];
+        //1. size
+        SET_SIZE
         
-        view.jc_size_value = ((NSValue*)size.value).CGSizeValue;
-        view.jc_x_value = ((NSNumber*)left.value).doubleValue;
-        view.jc_y_value = view.superview.jc_height_value/*父容器高度*/ - view.jc_height_value/*高度*/ + ((NSNumber*)bottom.value).doubleValue/*距离父容器底边距，一般为负数*/;
+        //2. left
+        SET_LEFT
+        
+        //3. bottom
+        SET_BOTTOM
         
         return YES;
     }
@@ -493,14 +547,14 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeTop)
         &&(frameTypes & JCFrameTypeSize)) {
         
-        JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];
-        JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];
-        JCFrame *size = [self filterFrameIn:frames frameType:(JCFrameTypeSize)];
+        //1. size
+        SET_SIZE
         
-        view.jc_size_value = ((NSValue*)size.value).CGSizeValue;
-        view.jc_y_value = ((NSNumber*)top.value).doubleValue;
-        view.jc_x_value = view.superview.jc_width_value/*父容器宽度*/-view.jc_width_value/*宽度*/+((NSNumber*)right.value).doubleValue/*右边距，负数*/;
+        //2. top
+        SET_TOP
         
+        //3. right
+        SET_RIGHT
         return YES;
     }
     
@@ -514,13 +568,14 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeSize)) {
         
-        JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];
-        JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];
-        JCFrame *size = [self filterFrameIn:frames frameType:(JCFrameTypeSize)];
+        //1. size
+        SET_SIZE
         
-        view.jc_size_value = ((NSValue*)size.value).CGSizeValue;
-        view.jc_x_value = view.superview.jc_width_value/*父容器宽度*/-view.jc_width_value/*宽度*/+((NSNumber*)right.value).doubleValue/*右边距，负数*/;
-        view.jc_y_value = view.superview.jc_height_value/*父容器高度*/ - view.jc_height_value/*高度*/ + ((NSNumber*)bottom.value).doubleValue/*距离父容器底边距，一般为负数*/;
+        //2. right
+        SET_RIGHT
+        
+        //3. bottom
+        SET_BOTTOM
         
         return YES;
     }
@@ -538,15 +593,17 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
-        JCFrame *centerX = [self filterFrameIn:frames frameType:(JCFrameTypeCenterX)];
-        JCFrame *centerY = [self filterFrameIn:frames frameType:(JCFrameTypeCenterY)];
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
+        //1. width
+        SET_WIDTH
         
-        view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        view.jc_height_value = ((NSNumber*)height.value).doubleValue;
-        view.jc_centerX_value = ((NSNumber*)centerX.value).doubleValue;
-        view.jc_centerY_value = ((NSNumber*)centerY.value).doubleValue;
+        //2. height
+        SET_HEIGHT
+        
+        //3. centerX
+        SET_CENTER_X
+        
+        //4. centerY
+        SET_CENTER_Y
         
         return YES;
     }
@@ -564,15 +621,17 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
-        JCFrame *centerX = [self filterFrameIn:frames frameType:(JCFrameTypeCenterX)];
-        JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
+        //1. width
+        SET_WIDTH
         
-        view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        view.jc_height_value = ((NSNumber*)height.value).doubleValue;
-        view.jc_centerX_value = ((NSNumber*)centerX.value).doubleValue;
-        view.jc_y_value = ((NSNumber*)top.value).doubleValue;
+        //2. height
+        SET_HEIGHT
+        
+        //3. centerX
+        SET_CENTER_X
+        
+        //4. top
+        SET_TOP
         
         return YES;
     }
@@ -590,15 +649,17 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
-        JCFrame *centerX = [self filterFrameIn:frames frameType:(JCFrameTypeCenterX)];
-        JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
+        //1. width
+        SET_WIDTH
         
-        view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        view.jc_height_value = ((NSNumber*)height.value).doubleValue;
-        view.jc_centerX_value = ((NSNumber*)centerX.value).doubleValue;
-        view.jc_y_value = view.superview.jc_height_value/*父容器高度*/ - view.jc_height_value/*高度*/ + ((NSNumber*)bottom.value).doubleValue/*距离父容器底边距，一般为负数*/;
+        //2. height
+        SET_HEIGHT
+        
+        //3. centerX
+        SET_CENTER_X
+        
+        //4. bottom
+        SET_BOTTOM
         
         return YES;
     }
@@ -616,15 +677,17 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
-        JCFrame *centerY = [self filterFrameIn:frames frameType:(JCFrameTypeCenterY)];
-        JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
+        //1. width
+        SET_WIDTH
         
-        view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        view.jc_height_value = ((NSNumber*)height.value).doubleValue;
-        view.jc_centerY_value = ((NSNumber*)centerY.value).doubleValue;
-        view.jc_x_value = ((NSNumber*)left.value).doubleValue;
+        //2. height
+        SET_HEIGHT
+        
+        //3. left
+        SET_LEFT
+        
+        //4. centerY
+        SET_CENTER_Y
         
         return YES;
     }
@@ -642,15 +705,17 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
-        JCFrame *centerY = [self filterFrameIn:frames frameType:(JCFrameTypeCenterY)];
-        JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
+        //1. width
+        SET_WIDTH
         
-        view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        view.jc_height_value = ((NSNumber*)height.value).doubleValue;
-        view.jc_centerY_value = ((NSNumber*)centerY.value).doubleValue;
-        view.jc_x_value = view.superview.jc_width_value/*父容器宽度*/-view.jc_width_value/*宽度*/+((NSNumber*)right.value).doubleValue/*右边距，负数*/;
+        //2. height
+        SET_HEIGHT
+        
+        //3. centerY
+        SET_CENTER_Y
+        
+        //4. right
+        SET_RIGHT
         
         return YES;
     }
@@ -669,15 +734,17 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
-        JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];
-        JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
+        //1. width
+        SET_WIDTH
         
-        view.jc_x_value = ((NSNumber*)left.value).doubleValue;
-        view.jc_y_value = ((NSNumber*)top.value).doubleValue;
-        view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        view.jc_height_value = ((NSNumber*)height.value).doubleValue;
+        //2. height
+        SET_HEIGHT
+        
+        //3. top
+        SET_TOP
+        
+        //4. left
+        SET_LEFT
         
         return YES;
     }
@@ -694,15 +761,18 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
-        JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];
-        JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
+        //1. width
+        SET_WIDTH
         
-        view.jc_x_value = ((NSNumber*)left.value).doubleValue;
-        view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        view.jc_height_value = ((NSNumber*)height.value).doubleValue;
-        view.jc_y_value = view.superview.jc_height_value/*父容器高度*/ - view.jc_height_value/*高度*/ + ((NSNumber*)bottom.value).doubleValue/*底部边距*/;
+        //2. height
+        SET_HEIGHT
+        
+        //3. bottom
+        SET_BOTTOM
+        
+        //4. left
+        SET_LEFT
+        
         
         return YES;
     }
@@ -720,15 +790,17 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
-        JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];
-        JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
+        //1. width
+        SET_WIDTH
         
-        view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        view.jc_height_value = ((NSNumber*)height.value).doubleValue;
-        view.jc_x_value = view.superview.jc_width_value/*父容器宽度*/ - view.jc_width_value/*宽度*/ + ((NSNumber*)right.value).doubleValue/*右边距*/;
-        view.jc_y_value = ((NSNumber*)top.value).doubleValue;
+        //2. height
+        SET_HEIGHT
+        
+        //3. right
+        SET_RIGHT
+        
+        //4. top
+        SET_TOP
         
         return YES;
     }
@@ -745,15 +817,17 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
         
-        JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];
-        JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
+        //1. width
+        SET_WIDTH
         
-        view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        view.jc_height_value = ((NSNumber*)height.value).doubleValue;
-        view.jc_x_value = view.superview.jc_width_value/*父容器宽度*/ - view.jc_width_value/*宽度*/ + ((NSNumber*)right.value).doubleValue/*右边距*/;
-        view.jc_y_value = view.superview.jc_height_value/*父容器高度*/ - view.jc_height_value/*高度*/ + ((NSNumber*)bottom.value).doubleValue/*底部边距*/;
+        //2. height
+        SET_HEIGHT
+        
+        //3. right
+        SET_RIGHT
+        
+        //4. bottom
+        SET_BOTTOM
         
         return YES;
     }
@@ -766,6 +840,7 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
 //      21. left and right and top and height
 + (BOOL)layoutByLeftAndRightAndTopAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
     
+    
     NSArray<JCFrame*>*frames = view.jc_frames;
     
     if ((frameTypes & JCFrameTypeLeft)
@@ -773,15 +848,14 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeTop)
         &&(frameTypes & JCFrameTypeHeight)) {
         
-        JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];
-        JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];
-        JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
+        //1. height
+        SET_HEIGHT
         
-        view.jc_x_value = ((NSNumber*)left.value).doubleValue;
-        view.jc_y_value = ((NSNumber*)top.value).doubleValue;
-        view.jc_width_value = view.superview.jc_width_value/*父容器宽度*/-view.jc_x_value/*左边距*/+((NSNumber*)right.value).doubleValue/*右边距，负数*/;
-        view.jc_height_value = ((NSNumber*)height.value).doubleValue;
+        //2. top
+        SET_TOP
+        
+        //3. left and right
+        SET_LEFT_RIGHT
         
         return YES;
     }
@@ -800,15 +874,14 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeHeight)) {
         
-        JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];
-        JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];
-        JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];
-        JCFrame *height = [self filterFrameIn:frames frameType:(JCFrameTypeHeight)];
+        //1. height
+        SET_HEIGHT
         
-        view.jc_x_value = ((NSNumber*)left.value).doubleValue;
-        view.jc_height_value = ((NSNumber*)height.value).doubleValue;
-        view.jc_width_value = view.superview.jc_width_value/*父容器宽度*/-view.jc_x_value/*左边距*/+((NSNumber*)right.value).doubleValue/*右边距，负数*/;
-        view.jc_y_value = view.superview.jc_height_value/*父容器高度*/-view.jc_height_value/*高度*/+((NSNumber*)bottom.value).doubleValue/*底边距，负数*/;
+        //2. bottom
+        SET_BOTTOM
+        
+        //3. left and right
+        SET_LEFT_RIGHT
         
         return YES;
     }
@@ -827,15 +900,14 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeWidth)) {
         
-        JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];
-        JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];
-        JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
+        //1. width
+        SET_WIDTH
         
-        view.jc_x_value = ((NSNumber*)left.value).doubleValue;
-        view.jc_y_value = ((NSNumber*)top.value).doubleValue;
-        view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        view.jc_height_value = view.superview.jc_height_value/*父容器高度*/ - view.jc_y_value/*顶边距*/ + ((NSNumber*)bottom.value).doubleValue/*底边距*/;
+        //2. left
+        SET_LEFT
+        
+        //3. top and bottom
+        SET_TOP_BOTTOM
         
         return YES;
     }
@@ -853,15 +925,14 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeWidth)) {
         
-        JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];
-        JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];
-        JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];
-        JCFrame *width = [self filterFrameIn:frames frameType:(JCFrameTypeWidth)];
+        //1. width
+        SET_WIDTH
         
-        view.jc_y_value = ((NSNumber*)top.value).doubleValue;
-        view.jc_width_value = ((NSNumber*)width.value).doubleValue;
-        view.jc_height_value = view.superview.jc_height_value/*父容器高度*/ - view.jc_y_value/*顶边距*/ + ((NSNumber*)bottom.value).doubleValue/*底边距*/;
-        view.jc_x_value = view.superview.jc_width_value/*父容器宽度*/ - view.jc_width_value/*宽度*/ + ((NSNumber*)right.value).doubleValue/*右边距*/;
+        //2. right
+        SET_RIGHT
+        
+        //3. top and bottom
+        SET_TOP_BOTTOM
         
         return YES;
     }
@@ -881,15 +952,11 @@ CGSize transToNewSize(CGSize relateSize,CGFloat multiplier,id offset){
         &&(frameTypes & JCFrameTypeTop)
         &&(frameTypes & JCFrameTypeBottom)) {
         
-        JCFrame *left = [self filterFrameIn:frames frameType:(JCFrameTypeLeft)];
-        JCFrame *right = [self filterFrameIn:frames frameType:(JCFrameTypeRight)];
-        JCFrame *top = [self filterFrameIn:frames frameType:(JCFrameTypeTop)];
-        JCFrame *bottom = [self filterFrameIn:frames frameType:(JCFrameTypeBottom)];
+        //1. left and right
+        SET_LEFT_RIGHT
         
-        view.jc_x_value = ((NSNumber*)left.value).doubleValue;
-        view.jc_y_value = ((NSNumber*)top.value).doubleValue;
-        view.jc_width_value = view.superview.jc_width_value/*父容器宽度*/-view.jc_x_value/*左边距*/+((NSNumber*)right.value).doubleValue/*右边距，负数*/;
-        view.jc_height_value = view.superview.jc_height_value/*父容器高度*/-view.jc_y_value/*顶边距*/+((NSNumber*)bottom.value).doubleValue/*右边距，负数*/;
+        //2. top and bottom
+        SET_TOP_BOTTOM
         
         return YES;
     }

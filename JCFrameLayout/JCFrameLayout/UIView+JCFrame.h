@@ -12,6 +12,7 @@
 
 @interface UIView (JCFrame)
 
+#pragma mark - getter and setter
 - (void)setJc_x_value:(CGFloat)value;
 - (CGFloat)jc_x_value;
 
@@ -36,6 +37,9 @@
 - (void)setJc_size_value:(CGSize)value;
 - (CGSize)jc_size_value;
 
+#pragma mark - getter only
+- (CGFloat)jc_right_value;
+- (CGFloat)jc_bottom_value;
 
 - (JCFrameAttribute*)jc_left;
 - (JCFrameAttribute*)jc_top;

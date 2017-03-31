@@ -68,6 +68,7 @@
 		282FD7EC1E895B6D00E17BFB /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		2836F33A1E8CE49400C9BE35 /* JCFrameAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFrameAttribute.h; sourceTree = "<group>"; };
 		2836F33B1E8CE49400C9BE35 /* JCFrameAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFrameAttribute.m; sourceTree = "<group>"; };
+		2836F33D1E8E2FEA00C9BE35 /* JCFrameExecutorMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCFrameExecutorMethods.h; sourceTree = "<group>"; };
 		28D22ADD1E8911C9002245F9 /* JCFrameLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JCFrameLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D22AE11E8911C9002245F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28D22AE31E8911C9002245F9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 			children = (
 				282FD7DE1E895B6400E17BFB /* JCFrameLayout.h */,
 				28E5EA981E8A42F300701A93 /* JCFrameLayoutConst.h */,
+				28E5EAD61E8BB16700701A93 /* JCFrameUtilities.h */,
 				282FD7DF1E895B6400E17BFB /* JCFrameMake.h */,
 				282FD7E01E895B6400E17BFB /* JCFrameMake.m */,
 				282FD7E11E895B6400E17BFB /* JCFrame.h */,
@@ -138,7 +140,7 @@
 				2836F33B1E8CE49400C9BE35 /* JCFrameAttribute.m */,
 				28E5EAD31E8B84A000701A93 /* JCFrameExecutor.h */,
 				28E5EAD41E8B84A000701A93 /* JCFrameExecutor.m */,
-				28E5EAD61E8BB16700701A93 /* JCFrameUtilities.h */,
+				2836F33D1E8E2FEA00C9BE35 /* JCFrameExecutorMethods.h */,
 				282FD7E31E895B6400E17BFB /* UIView+JCFrame.h */,
 				282FD7E41E895B6400E17BFB /* UIView+JCFrame.m */,
 				282FD7E51E895B6400E17BFB /* UIView+JCFrameLayout.h */,

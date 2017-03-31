@@ -13,6 +13,7 @@ static char debugkey;
 
 @implementation UIView (JCFrame)
 
+#pragma mark - getter and setter
 - (void)setJc_x_value:(CGFloat)value{
     CGRect frame = self.frame;
     frame.origin.x = value;
@@ -81,6 +82,14 @@ static char debugkey;
 }
 - (CGSize)jc_size_value{
     return self.frame.size;
+}
+
+#pragma mark - getter only
+- (CGFloat)jc_right_value{
+    return self.jc_x_value + self.jc_width_value;
+}
+- (CGFloat)jc_bottom_value{
+    return self.jc_y_value + self.jc_height_value;
 }
 
 
