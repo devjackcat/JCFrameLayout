@@ -39,13 +39,25 @@ void setLeftByLeftFrame(UIView*view,JCFrame*frame){
     if (frame.hasRelateAttr) {
         //Left可以相对Left ,CenterX ,Right
         CGFloat x = 0;
-        if (frame.frameAttr.relateFrameType == JCFrameTypeLeft) {
-            x = frame.frameAttr.relateView.jc_x_value;
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterX) {
-            x = frame.frameAttr.relateView.jc_centerX_value;
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeRight) {
-            x = frame.frameAttr.relateView.jc_right_value;
+        //如果相对的是父容器，则计算方式不同
+        if (frame.frameAttr.relateView == view.superview) {
+            if (frame.frameAttr.relateFrameType == JCFrameTypeLeft) {
+                x = 0;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterX) {
+                x = view.superview.jc_width_value / 2;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeRight) {
+                x = view.superview.jc_width_value;
+            }
+        }else{
+            if (frame.frameAttr.relateFrameType == JCFrameTypeLeft) {
+                x = frame.frameAttr.relateView.jc_x_value;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterX) {
+                x = frame.frameAttr.relateView.jc_centerX_value;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeRight) {
+                x = frame.frameAttr.relateView.jc_right_value;
+            }
         }
+        
         x = x * frame.multiplier + ((NSNumber*)frame.offset).doubleValue;
         frame.jc_equalTo(x);
         view.jc_x_value = x;
@@ -58,13 +70,25 @@ void setRightByRightFrame(UIView*view,JCFrame*frame){
     if (frame.hasRelateAttr) {
         //right可以相对left,centerX,right
         CGFloat x = 0;
-        if (frame.frameAttr.relateFrameType == JCFrameTypeLeft) {
-            x = frame.frameAttr.relateView.jc_x_value;
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterX) {
-            x = frame.frameAttr.relateView.jc_centerX_value;
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeRight) {
-            x = frame.frameAttr.relateView.jc_right_value;
+        //如果相对的是父容器，则计算方式不同
+        if (frame.frameAttr.relateView == view.superview) {
+            if (frame.frameAttr.relateFrameType == JCFrameTypeLeft) {
+                x = 0;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterX) {
+                x = view.superview.jc_width_value / 2;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeRight) {
+                x = view.superview.jc_width_value;
+            }
+        }else{
+            if (frame.frameAttr.relateFrameType == JCFrameTypeLeft) {
+                x = frame.frameAttr.relateView.jc_x_value;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterX) {
+                x = frame.frameAttr.relateView.jc_centerX_value;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeRight) {
+                x = frame.frameAttr.relateView.jc_right_value;
+            }
         }
+        
         x = (x - view.jc_width_value) * frame.multiplier + ((NSNumber*)frame.offset).doubleValue;
         frame.jc_equalTo(x);
         view.jc_x_value = x;
@@ -92,13 +116,17 @@ void setCenterByCenterFrame(UIView*view,JCFrame*frame){
     if (frame.hasRelateAttr) {
         //center的相对值只能是center
         if(frame.frameAttr.relateFrameType == JCFrameTypeCenter){
-            //1. 根据multiplier和offset获取新的center
-            CGPoint newCenter = transToNewCenter(frame.frameAttr.relateView.jc_center_value,frame.multiplier,frame.offset);
+            //1. 计算
+            CGPoint newCenter = CGPointZero;
+            if (frame.frameAttr.relateView == view.superview) { //如果是相对于父容器，则需要特殊处理
+                newCenter = CGPointMake(view.superview.jc_width_value / 2, view.superview.jc_height_value / 2);
+            }else{
+                newCenter = transToNewCenter(frame.frameAttr.relateView.jc_center_value,frame.multiplier,frame.offset);
+            }
             //2. 将新的值回填回去，因为center的value属性赋值
             frame.jc_equalTo(newCenter);
             //3. 设置新值
             view.jc_center_value = newCenter;
-            
         }
     }else{
         view.jc_center_value = ((NSValue*)frame.value).CGPointValue;
@@ -142,15 +170,30 @@ void setCenterXByCenterXFrame(UIView*view,JCFrame*frame){
          centerX相对值可以有left,centerX,right三个
          */
         CGFloat newCenterX = 0;
-        if (frame.frameAttr.relateFrameType == JCFrameTypeLeft) {//Left
-            newCenterX = frame.frameAttr.relateView.jc_x_value;
-            
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterX) {//CenterX
-            newCenterX = frame.frameAttr.relateView.jc_centerX_value;
-            
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeRight) {//Right
-            newCenterX = frame.frameAttr.relateView.jc_right_value;
-            
+        
+        //如果相对的是父容器，则计算方式不同
+        if (frame.frameAttr.relateView == view.superview) {
+            if (frame.frameAttr.relateFrameType == JCFrameTypeLeft) {//Left
+                newCenterX = 0;
+                
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterX) {//CenterX
+                newCenterX = view.superview.jc_width_value / 2;
+                
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeRight) {//Right
+                newCenterX = view.superview.jc_width_value;
+                
+            }
+        }else{
+            if (frame.frameAttr.relateFrameType == JCFrameTypeLeft) {//Left
+                newCenterX = frame.frameAttr.relateView.jc_x_value;
+                
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterX) {//CenterX
+                newCenterX = frame.frameAttr.relateView.jc_centerX_value;
+                
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeRight) {//Right
+                newCenterX = frame.frameAttr.relateView.jc_right_value;
+                
+            }
         }
         
         newCenterX = newCenterX * frame.multiplier + ((NSNumber*)frame.offset).doubleValue;
@@ -167,15 +210,29 @@ void setCenterYByCenterYFrame(UIView*view,JCFrame*frame){
          centerY相对值可以有top,centerY,bottom三个
          */
         CGFloat newCenterY = 0;
-        if (frame.frameAttr.relateFrameType == JCFrameTypeTop) {//top
-            newCenterY = frame.frameAttr.relateView.jc_y_value;
-            
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterY) {//CenterY
-            newCenterY = frame.frameAttr.relateView.jc_centerY_value;
-            
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeBottom) {//bottom
-            newCenterY = frame.frameAttr.relateView.jc_bottom_value;
+        //如果相对的是父容器，则计算方式不同
+        if (frame.frameAttr.relateView == view.superview) {
+            if (frame.frameAttr.relateFrameType == JCFrameTypeTop) {//top
+                newCenterY = 0;
+                
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterY) {//CenterY
+                newCenterY = view.superview.jc_height_value / 2;
+                
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeBottom) {//bottom
+                newCenterY = view.superview.jc_height_value;
+            }
+        }else{
+            if (frame.frameAttr.relateFrameType == JCFrameTypeTop) {//top
+                newCenterY = frame.frameAttr.relateView.jc_y_value;
+                
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterY) {//CenterY
+                newCenterY = frame.frameAttr.relateView.jc_centerY_value;
+                
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeBottom) {//bottom
+                newCenterY = frame.frameAttr.relateView.jc_bottom_value;
+            }
         }
+        
         
         newCenterY = newCenterY * frame.multiplier + ((NSNumber*)frame.offset).doubleValue;
         
@@ -190,13 +247,25 @@ void setTopByTopFrame(UIView*view,JCFrame*frame){
     if (frame.hasRelateAttr) {
         //top 可以相对 top,centerY,bottom
         CGFloat newTop = 0;
-        if (frame.frameAttr.relateFrameType == JCFrameTypeTop) {
-            newTop = frame.frameAttr.relateView.jc_y_value;
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterY) {
-            newTop = frame.frameAttr.relateView.jc_centerY_value;
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeBottom) {
-            newTop = frame.frameAttr.relateView.jc_bottom_value;
+        //如果相对的是父容器，则计算方式不同
+        if (frame.frameAttr.relateView == view.superview) {
+            if (frame.frameAttr.relateFrameType == JCFrameTypeTop) {
+                newTop = 0;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterY) {
+                newTop = view.superview.jc_height_value / 2;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeBottom) {
+                newTop = view.superview.jc_height_value;
+            }
+        }else{
+            if (frame.frameAttr.relateFrameType == JCFrameTypeTop) {
+                newTop = frame.frameAttr.relateView.jc_y_value;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterY) {
+                newTop = frame.frameAttr.relateView.jc_centerY_value;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeBottom) {
+                newTop = frame.frameAttr.relateView.jc_bottom_value;
+            }
         }
+        
         newTop = newTop * frame.multiplier + ((NSNumber*)frame.offset).doubleValue;
         //回填
         frame.jc_equalTo(newTop);
@@ -211,13 +280,25 @@ void setBottomByBottomFrame(UIView*view,JCFrame*frame){
     if (frame.hasRelateAttr) {
         //bottom可以相对top,centerY,bottom
         CGFloat y = 0;
-        if (frame.frameAttr.relateFrameType == JCFrameTypeTop) { //Top
-            y = frame.frameAttr.relateView.jc_y_value;
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterY) { //CenterY
-            y = frame.frameAttr.relateView.jc_centerY_value;
-        }else if (frame.frameAttr.relateFrameType == JCFrameTypeBottom) { //Bottom
-            y = frame.frameAttr.relateView.jc_bottom_value;
+        //如果相对的是父容器，则计算方式不同
+        if (frame.frameAttr.relateView == view.superview) {
+            if (frame.frameAttr.relateFrameType == JCFrameTypeTop) { //Top
+                y = 0;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterY) { //CenterY
+                y = view.superview.jc_height_value / 2;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeBottom) { //Bottom
+                y = view.superview.jc_height_value;
+            }
+        }else{
+            if (frame.frameAttr.relateFrameType == JCFrameTypeTop) { //Top
+                y = frame.frameAttr.relateView.jc_y_value;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeCenterY) { //CenterY
+                y = frame.frameAttr.relateView.jc_centerY_value;
+            }else if (frame.frameAttr.relateFrameType == JCFrameTypeBottom) { //Bottom
+                y = frame.frameAttr.relateView.jc_bottom_value;
+            }
         }
+        
         y = (y - view.jc_height_value) * frame.multiplier + ((NSNumber*)frame.offset).doubleValue;
         frame.jc_equalTo(y);
         view.jc_y_value = y;

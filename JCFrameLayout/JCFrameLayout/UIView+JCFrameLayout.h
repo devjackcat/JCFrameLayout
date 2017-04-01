@@ -10,6 +10,9 @@
 
 #import "JCFrameMake.h"
 
+#define jc_screen_width ([UIScreen mainScreen].bounds.size.width)
+#define jc_screen_height ([UIScreen mainScreen].bounds.size.height)
+
 @interface UIView (JCFrameLayout)
 
 - (void)jc_makeLayout:(void(^)(JCFrameMake *make))block;

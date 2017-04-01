@@ -71,11 +71,12 @@
     if (!_datasource) {
         NSMutableArray *array = [NSMutableArray array];
         
-        [array addObject:@{@"title":@"左，上，由，下",@"cls":@"ExampleVC1"}];
+        [array addObject:@{@"title":@"左，上，右，下",@"cls":@"ExampleVC1"}];
         [array addObject:@{@"title":@"九宫格(绝对布局)",@"cls":@"ExampleVC2"}];
         [array addObject:@{@"title":@"九宫格(相对布局)",@"cls":@"ExampleVC3"}];
-        [array addObject:@{@"title":@"一万个方块(绝对布局)",@"cls":@"ExampleVC4"}];
-        [array addObject:@{@"title":@"一万个方块(相对布局)",@"cls":@"ExampleVC5"}];
+        [array addObject:@{@"title":@"五千个方块(绝对布局)",@"cls":@"ExampleVC4"}];
+        [array addObject:@{@"title":@"五千个方块(相对布局)",@"cls":@"ExampleVC5"}];
+        [array addObject:@{@"title":@"调试测试",@"cls":@"ExampleVC6"}];
         
         _datasource = [array copy];
     }
