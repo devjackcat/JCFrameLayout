@@ -18,11 +18,6 @@
  **/
 @property (nonatomic,weak) UIView *view;
 
-/**
- *  <#注释#>
- **/
-@property (nonatomic,assign) JCFrameType frameTypes;
-
 @end
 
 @implementation JCFrameMake
@@ -75,7 +70,7 @@
 
 - (JCFrame *)createJCLayoutFrame:(JCFrameType)frameType{
 
-    if (self.frameTypes & frameType) {
+    if (self.view.jc_settedFrameTypes & frameType) {
         /**
          如果这个frameType已存在，则直接返回，反之创建
          */
@@ -88,7 +83,7 @@
     }else{
         
         //1.将frameType标记为已存在
-        self.frameTypes |= frameType;
+        self.view.jc_settedFrameTypes |= frameType;
         
         //2.创建JCFrameAttribute
         JCFrameAttribute *frameAttribute = [[JCFrameAttribute alloc]initWithView:self.view frameType:frameType];
@@ -107,8 +102,7 @@
 }
 
 - (void)executeLayout{
-    [JCFrameExecutor executeWithView:self.view
-                          frameTypes:self.frameTypes];
+    [JCFrameExecutor executeWithView:self.view];
     JCLog(@"--frames = %@",self.view.jc_frames);
 
 }

@@ -10,6 +10,7 @@
 #import <objc/runtime.h>
 
 static char debugkey;
+static char settedFrameTypesKey;
 
 @implementation UIView (JCFrame)
 
@@ -141,5 +142,17 @@ static char debugkey;
         objc_setAssociatedObject(self, &key, array, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return array;
+}
+- (JCFrameType)jc_settedFrameTypes{
+    NSNumber *settedFrameTypes = ((NSNumber*)objc_getAssociatedObject(self, &settedFrameTypesKey));
+    if (!settedFrameTypes) {
+        settedFrameTypes = [NSNumber numberWithInt:0];
+        objc_setAssociatedObject(self, &settedFrameTypesKey, settedFrameTypes, OBJC_ASSOCIATION_ASSIGN);
+    }
+    return settedFrameTypes.integerValue;
+}
+- (void)setJc_settedFrameTypes:(JCFrameType)frameType{
+    NSNumber *settedFrameTypes = [NSNumber numberWithInt:frameType];
+    objc_setAssociatedObject(self, &settedFrameTypesKey, settedFrameTypes, OBJC_ASSOCIATION_ASSIGN);
 }
 @end

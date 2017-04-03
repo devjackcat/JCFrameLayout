@@ -495,137 +495,137 @@ setCenterByCenterFrame(view,center);\
 //      含有4条边距值
 //      25. left and right and top and bottom
 
-+ (void)executeWithView:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (void)executeWithView:(UIView*)view{
     
     //      1. center and size
-    if ([self layoutByCenterAndSize:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterAndSize:view]) {
         return;
     }
     
     //      2. center and width and height
-    if ([self layoutByCenterAndWidthAndHeight:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterAndWidthAndHeight:view]) {
         return;
     }
     
     //      3. centerX and centerY and size
-    if ([self layoutByCenterXAndCenterYAndSize:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterXAndCenterYAndSize:view]) {
         return;
     }
     
     //      4. centerX and top and size
-    if ([self layoutByCenterXAndTopAndSize:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterXAndTopAndSize:view]) {
         return;
     }
     
     //      5. centerX and bottom and size
-    if ([self layoutByCenterXAndBottomAndSize:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterXAndBottomAndSize:view]) {
         return;
     }
     
     //      6. centerY and left and size
-    if ([self layoutByCenterYAndLeftAndSize:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterYAndLeftAndSize:view]) {
         return;
     }
     
     
     //      7. centerY and right and size
-    if ([self layoutByCenterYAndRightAndSize:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterYAndRightAndSize:view]) {
         return;
     }
     
     //      8. left and top and size
-    if ([self layoutByLeftAndTopAndSize:view frameTypes:frameTypes]) {
+    if ([self layoutByLeftAndTopAndSize:view]) {
         return;
     }
     
     
     //      9. left and bottom and size
-    if ([self layoutByLeftAndBottomAndSize:view frameTypes:frameTypes]) {
+    if ([self layoutByLeftAndBottomAndSize:view]) {
         return;
     }
     
     //      10. right and top and size
-    if ([self layoutByRightAndTopAndSize:view frameTypes:frameTypes]) {
+    if ([self layoutByRightAndTopAndSize:view]) {
         return;
     }
     
     
     //      11. right and bottom and size
-    if ([self layoutByRightAndBottomAndSize:view frameTypes:frameTypes]) {
+    if ([self layoutByRightAndBottomAndSize:view]) {
         return;
     }
     
     //      12. centerX and centerY and width and height
-    if ([self layoutByCenterXAndCenterYAndWidthAndHeight:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterXAndCenterYAndWidthAndHeight:view]) {
         return;
     }
     
     //      13. centerX and top and width and height
-    if ([self layoutByCenterXAndTopAndWidthAndHeight:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterXAndTopAndWidthAndHeight:view]) {
         return;
     }
     
     //      14. centerX and bottom and width and height
-    if ([self layoutByCenterXAndBottomAndWidthAndHeight:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterXAndBottomAndWidthAndHeight:view]) {
         return;
     }
     
     //      15. centerY and left and width and height
-    if ([self layoutByCenterYAndLeftAndWidthAndHeight:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterYAndLeftAndWidthAndHeight:view]) {
         return;
     }
     
     //      16. centerY and right and width and height
-    if ([self layoutByCenterYAndRightAndWidthAndHeight:view frameTypes:frameTypes]) {
+    if ([self layoutByCenterYAndRightAndWidthAndHeight:view]) {
         return;
     }
     
     //      含有2条边界值，2个尺寸
     //      17. left and top and width and height
-    if ([self layoutByLeftAndTopAndWidthAndHeight:view frameTypes:frameTypes]) {
+    if ([self layoutByLeftAndTopAndWidthAndHeight:view]) {
         return;
     }
     
     //      18. left and bottom and width and height
-    if ([self layoutByLeftAndBottomAndWidthAndHeight:view frameTypes:frameTypes ]) {
+    if ([self layoutByLeftAndBottomAndWidthAndHeight:view ]) {
         return;
     }
     
     //      19. right and top and width and height
-    if ([self layoutByRightAndTopAndWidthAndHeight:view frameTypes:frameTypes]) {
+    if ([self layoutByRightAndTopAndWidthAndHeight:view]) {
         return;
     }
     
     //      20. right and bottom and width and height
-    if ([self layoutByRightAndBottomAndWidthAndHeight:view frameTypes:frameTypes]) {
+    if ([self layoutByRightAndBottomAndWidthAndHeight:view]) {
         return;
     }
     
     //      含有3条边距值,1个尺寸值
     //      21. left and right and top and height
-    if ([self layoutByLeftAndRightAndTopAndHeight:view frameTypes:frameTypes]) {
+    if ([self layoutByLeftAndRightAndTopAndHeight:view]) {
         return;
     }
     
     //      22. left and right and bottom and height
-    if ([self layoutByLeftAndRightAndBottomAndHeight:view frameTypes:frameTypes]) {
+    if ([self layoutByLeftAndRightAndBottomAndHeight:view]) {
         return;
     }
     
     //      23. left and top and bottom and width
-    if ([self layoutByLeftAndTopAndBottomAndWidth:view frameTypes:frameTypes]) {
+    if ([self layoutByLeftAndTopAndBottomAndWidth:view]) {
         return;
     }
     
     //      24. right and top and bottom and width
-    if ([self layoutByRightAndTopAndBottomAndWidth:view frameTypes:frameTypes]) {
+    if ([self layoutByRightAndTopAndBottomAndWidth:view]) {
         
         return;
     }
     
     //      含有4条边距值
     //      25. left and right and top and bottom
-    if ([self layoutByLeftAndRightAndTopAndBottom:view frameTypes:frameTypes]) {
+    if ([self layoutByLeftAndRightAndTopAndBottom:view]) {
         
         return;
     }
@@ -633,8 +633,10 @@ setCenterByCenterFrame(view,center);\
 
 #pragma mark - 含有 center 和 size
 //      1. center and size
-+ (BOOL)layoutByCenterAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByCenterAndSize:(UIView*)view{
 
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
     if ((frameTypes & JCFrameTypeCenter)
         &&(frameTypes & JCFrameTypeSize)) {
         
@@ -656,8 +658,10 @@ setCenterByCenterFrame(view,center);\
 
 #pragma mark - 只有 center
 //      2. center and width and height
-+ (BOOL)layoutByCenterAndWidthAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByCenterAndWidthAndHeight:(UIView*)view{
 
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
     if ((frameTypes & JCFrameTypeCenter)
         &&(frameTypes & JCFrameTypeWidth)
         &&(frameTypes & JCFrameTypeHeight)) {
@@ -684,7 +688,9 @@ setCenterByCenterFrame(view,center);\
 
 #pragma mark - 只有 size 和 (centerX 或 centerY)
 //      3. centerX and centerY and size
-+ (BOOL)layoutByCenterXAndCenterYAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByCenterXAndCenterYAndSize:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     
     if ((frameTypes & JCFrameTypeCenterX)
         &&(frameTypes & JCFrameTypeCenterY)
@@ -710,7 +716,10 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      4. centerX and top and size
-+ (BOOL)layoutByCenterXAndTopAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByCenterXAndTopAndSize:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
     if ((frameTypes & JCFrameTypeCenterX)
         &&(frameTypes & JCFrameTypeTop)
         &&(frameTypes & JCFrameTypeSize)) {
@@ -736,7 +745,11 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      5. centerX and bottom and size
-+ (BOOL)layoutByCenterXAndBottomAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{NSArray<JCFrame*>*frames = view.jc_frames;
++ (BOOL)layoutByCenterXAndBottomAndSize:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
+    NSArray<JCFrame*>*frames = view.jc_frames;
     if ((frameTypes & JCFrameTypeCenterX)
         &&(frameTypes & JCFrameTypeBottom)
         &&(frameTypes & JCFrameTypeSize)) {
@@ -758,7 +771,9 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      6. centerY and left and size
-+ (BOOL)layoutByCenterYAndLeftAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByCenterYAndLeftAndSize:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     
     if ((frameTypes & JCFrameTypeCenterY)
         &&(frameTypes & JCFrameTypeLeft)
@@ -783,7 +798,11 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      7. centerY and right and size
-+ (BOOL)layoutByCenterYAndRightAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{NSArray<JCFrame*>*frames = view.jc_frames;
++ (BOOL)layoutByCenterYAndRightAndSize:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
+    NSArray<JCFrame*>*frames = view.jc_frames;
     
     if ((frameTypes & JCFrameTypeCenterY)
         &&(frameTypes & JCFrameTypeRight)
@@ -808,7 +827,12 @@ setCenterByCenterFrame(view,center);\
 
 #pragma mark - 只有 size
 //      8. left and top and size
-+ (BOOL)layoutByLeftAndTopAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{NSArray<JCFrame*>*frames = view.jc_frames;
++ (BOOL)layoutByLeftAndTopAndSize:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
+    NSArray<JCFrame*>*frames = view.jc_frames;
+    
     if ((frameTypes & JCFrameTypeLeft)
         &&(frameTypes & JCFrameTypeTop)
         &&(frameTypes & JCFrameTypeSize)) {
@@ -830,7 +854,11 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      9. left and bottom and size
-+ (BOOL)layoutByLeftAndBottomAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{NSArray<JCFrame*>*frames = view.jc_frames;
++ (BOOL)layoutByLeftAndBottomAndSize:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
+    NSArray<JCFrame*>*frames = view.jc_frames;
     
     if ((frameTypes & JCFrameTypeLeft)
         &&(frameTypes & JCFrameTypeBottom)
@@ -853,7 +881,9 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      10. right and top and size
-+ (BOOL)layoutByRightAndTopAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByRightAndTopAndSize:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     
     NSArray<JCFrame*>*frames = view.jc_frames;
     
@@ -878,7 +908,11 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      11. right and bottom and size
-+ (BOOL)layoutByRightAndBottomAndSize:(UIView*)view frameTypes:(JCFrameType)frameTypes{NSArray<JCFrame*>*frames = view.jc_frames;
++ (BOOL)layoutByRightAndBottomAndSize:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
+    NSArray<JCFrame*>*frames = view.jc_frames;
     
     if ((frameTypes & JCFrameTypeRight)
         &&(frameTypes & JCFrameTypeBottom)
@@ -903,7 +937,10 @@ setCenterByCenterFrame(view,center);\
 
 #pragma mark - 含有centerX 或 centerY
 //      12. centerX and centerY and width and height
-+ (BOOL)layoutByCenterXAndCenterYAndWidthAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByCenterXAndCenterYAndWidthAndHeight:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
     NSArray<JCFrame*>*frames = view.jc_frames;
     
     if ((frameTypes & JCFrameTypeCenterX)
@@ -933,7 +970,10 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      13. centerX and top and width and height
-+ (BOOL)layoutByCenterXAndTopAndWidthAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByCenterXAndTopAndWidthAndHeight:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
     NSArray<JCFrame*>*frames = view.jc_frames;
     
     if ((frameTypes & JCFrameTypeCenterX)
@@ -962,7 +1002,9 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      14. centerX and bottom and width and height
-+ (BOOL)layoutByCenterXAndBottomAndWidthAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByCenterXAndBottomAndWidthAndHeight:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     
     NSArray<JCFrame*>*frames = view.jc_frames;
     
@@ -992,7 +1034,9 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      15. centerY and left and width and height
-+ (BOOL)layoutByCenterYAndLeftAndWidthAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByCenterYAndLeftAndWidthAndHeight:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     
     NSArray<JCFrame*>*frames = view.jc_frames;
     
@@ -1022,7 +1066,9 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      16. centerY and right and width and height
-+ (BOOL)layoutByCenterYAndRightAndWidthAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByCenterYAndRightAndWidthAndHeight:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     
     NSArray<JCFrame*>*frames = view.jc_frames;
     
@@ -1053,7 +1099,9 @@ setCenterByCenterFrame(view,center);\
 
 #pragma mark - 含有2条边界值，2个尺寸的组合
 //      17. left and top and width and height
-+ (BOOL)layoutByLeftAndTopAndWidthAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByLeftAndTopAndWidthAndHeight:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     
     NSArray<JCFrame*>*frames = view.jc_frames;
     
@@ -1083,7 +1131,10 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      18. left and bottom and width and height
-+ (BOOL)layoutByLeftAndBottomAndWidthAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByLeftAndBottomAndWidthAndHeight:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
     NSArray<JCFrame*>*frames = view.jc_frames;
     
     if ((frameTypes & JCFrameTypeLeft)
@@ -1113,7 +1164,9 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      19. right and top and width and height
-+ (BOOL)layoutByRightAndTopAndWidthAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByRightAndTopAndWidthAndHeight:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     
     NSArray<JCFrame*>*frames = view.jc_frames;
     
@@ -1143,7 +1196,9 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      20. right and bottom and width and height
-+ (BOOL)layoutByRightAndBottomAndWidthAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByRightAndBottomAndWidthAndHeight:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     NSArray<JCFrame*>*frames = view.jc_frames;
     
     if ((frameTypes & JCFrameTypeRight)
@@ -1174,8 +1229,9 @@ setCenterByCenterFrame(view,center);\
 
 #pragma mark - 含有3条边距值,1个尺寸值的组合
 //      21. left and right and top and height
-+ (BOOL)layoutByLeftAndRightAndTopAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByLeftAndRightAndTopAndHeight:(UIView*)view{
     
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     
     NSArray<JCFrame*>*frames = view.jc_frames;
     
@@ -1203,7 +1259,9 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      22. left and right and bottom and height
-+ (BOOL)layoutByLeftAndRightAndBottomAndHeight:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByLeftAndRightAndBottomAndHeight:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     
     NSArray<JCFrame*>*frames = view.jc_frames;
     
@@ -1231,7 +1289,9 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      23. left and top and bottom and width
-+ (BOOL)layoutByLeftAndTopAndBottomAndWidth:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByLeftAndTopAndBottomAndWidth:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     
     NSArray<JCFrame*>*frames = view.jc_frames;
     
@@ -1259,7 +1319,10 @@ setCenterByCenterFrame(view,center);\
 }
 
 //      24. right and top and bottom and width
-+ (BOOL)layoutByRightAndTopAndBottomAndWidth:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByRightAndTopAndBottomAndWidth:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
+    
     NSArray<JCFrame*>*frames = view.jc_frames;
     
     if ((frameTypes & JCFrameTypeRight)
@@ -1288,7 +1351,9 @@ setCenterByCenterFrame(view,center);\
 
 #pragma mark - 含有4条边距值
 //      25. left and right and top and bottom
-+ (BOOL)layoutByLeftAndRightAndTopAndBottom:(UIView*)view frameTypes:(JCFrameType)frameTypes{
++ (BOOL)layoutByLeftAndRightAndTopAndBottom:(UIView*)view{
+    
+    JCFrameType frameTypes = view.jc_settedFrameTypes;
     NSArray<JCFrame*>*frames = view.jc_frames;
     
     if ((frameTypes & JCFrameTypeLeft)

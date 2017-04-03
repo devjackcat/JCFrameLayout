@@ -13,7 +13,6 @@
 
 @interface JCFrameExecutor : NSObject
 
-+ (void)executeWithView:(UIView*)view
-             frameTypes:(JCFrameType)frameTypes;
++ (void)executeWithView:(UIView*)view;
 
 @end

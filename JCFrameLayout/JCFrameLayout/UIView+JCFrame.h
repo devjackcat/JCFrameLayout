@@ -57,4 +57,7 @@
 
 - (NSMutableArray *)jc_frames;
 
+- (JCFrameType)jc_settedFrameTypes;
+- (void)setJc_settedFrameTypes:(JCFrameType)frameType;
+
 @end

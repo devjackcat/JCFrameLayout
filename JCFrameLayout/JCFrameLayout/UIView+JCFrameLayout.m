@@ -9,6 +9,8 @@
 #import "UIView+JCFrameLayout.h"
 #import "UIView+JCFrame.h"
 
+#import "JCFrameExecutor.h"
+
 @implementation UIView (JCFrameLayout)
 
 - (void)jc_makeLayout:(void (^)(JCFrameMake *))block{
@@ -22,6 +24,14 @@
     [make executeLayout];
 }
 
+
+/**
+ 重新布局
+ */
+- (void)jc_updateLayout{
+    [JCFrameExecutor executeWithView:self];
+    JCLog(@"--frames = %@",self.view.jc_frames);
+}
 
 
 @end
