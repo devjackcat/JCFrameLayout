@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "JCFrameLayout"
-  s.version      = "2.0.2"
+  s.version      = "2.0.3"
   s.summary      = "一款采用链式语法为视图做Frame布局的工具"
 
   # This description is used to generate tags and improve search results.
