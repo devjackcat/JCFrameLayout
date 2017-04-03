@@ -11,7 +11,14 @@
 #import "JCFrameLayout.h"
 
 @interface ExampleVC6 ()
-
+/**
+ *  <#注释#>
+ **/
+@property (nonatomic,strong) UIView *yellowView;
+/**
+ *  <#注释#>
+ **/
+@property (nonatomic,strong) UIView *redView;
 @end
 
 @implementation ExampleVC6
@@ -21,33 +28,31 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIView *yellowView = [[UIView alloc]init];
-    yellowView.backgroundColor = [UIColor yellowColor];
-    [self.view addSubview:yellowView];
+    _yellowView = [[UIView alloc]init];
+    _yellowView.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:_yellowView];
     
-    [yellowView jc_makeLayout:^(JCFrameMake *make) {
+    [_yellowView jc_makeLayout:^(JCFrameMake *make) {
         make.width.height.jc_equalTo(200);
         make.center.equalTo(self.view);
     }];
     
-    UIView *redView = [[UIView alloc]init];
-    redView.backgroundColor = [UIColor redColor];
-    [yellowView addSubview:redView];
-    
-    [redView jc_makeLayout:^(JCFrameMake *make) {
-        make.width.height.jc_equalTo(100);
-        
-//        make.center.equalTo(yellowView);
-//        make.centerX.equalTo(yellowView.jc_left);
-//        make.centerY.equalTo(yellowView.jc_bottom);
-        
-//        make.top.equalTo(yellowView.jc_bottom);
-//        make.right.equalTo(yellowView.jc_right);
-        
-        make.left.equalTo(yellowView.jc_right);
-        make.bottom.equalTo(yellowView.jc_bottom);
-        
+//    _redView = [[UIView alloc]init];
+//    _redView.backgroundColor = [UIColor redColor];
+//    [_yellowView addSubview:_redView];
+//    
+//    [_redView jc_makeLayout:^(JCFrameMake *make) {
+//        make.center.equalTo(_yellowView);
+//        make.size.jc_equalTo(CGSizeMake(100, 100));
+//    }];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [_yellowView jc_makeLayout:^(JCFrameMake *make) {
+        make.width.height.jc_equalTo(200);
+        make.center.equalTo(self.view).jc_offset(CGPointMake(0, 50));
     }];
+//    [_redView jc_updateLayout];
 }
 
 @end

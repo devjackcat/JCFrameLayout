@@ -14,8 +14,11 @@
 @implementation UIView (JCFrameLayout)
 
 - (void)jc_makeLayout:(void (^)(JCFrameMake *))block{
+    
     //清空已存在的属性
     [self.jc_frames removeAllObjects];
+    self.jc_settedFrameTypes = 0;
+    
     //创建Frame构建器
     JCFrameMake *make = [[JCFrameMake alloc]initWithView:self];
     //生成frame
@@ -30,7 +33,7 @@
  */
 - (void)jc_updateLayout{
     [JCFrameExecutor executeWithView:self];
-    JCLog(@"--frames = %@",self.view.jc_frames);
+    JCLog(@"--frames = %@",self.jc_frames);
 }
 
 

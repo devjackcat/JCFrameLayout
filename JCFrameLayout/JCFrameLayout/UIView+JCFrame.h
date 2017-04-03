@@ -56,7 +56,9 @@
 @property (nonatomic,copy) NSString *jc_debug_key;
 
 - (NSMutableArray *)jc_frames;
-
+/**
+ 已经设置过得布局属性，通过位运算来组合
+ */
 - (JCFrameType)jc_settedFrameTypes;
 - (void)setJc_settedFrameTypes:(JCFrameType)frameType;
 

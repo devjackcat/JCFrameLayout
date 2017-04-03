@@ -121,8 +121,11 @@ void setCenterByCenterFrame(UIView*view,JCFrame*frame){
             if (frame.frameAttr.relateView == view.superview) { //如果是相对于父容器，则需要特殊处理
                 newCenter = CGPointMake(view.superview.jc_width_value / 2, view.superview.jc_height_value / 2);
             }else{
-                newCenter = transToNewCenter(frame.frameAttr.relateView.jc_center_value,frame.multiplier,frame.offset);
+                newCenter = frame.frameAttr.relateView.jc_center_value;
             }
+            
+            newCenter = transToNewCenter(frame.frameAttr.relateView.jc_center_value,frame.multiplier,frame.offset);
+            
             //2. 将新的值回填回去，因为center的value属性赋值
             frame.jc_equalTo(newCenter);
             //3. 设置新值

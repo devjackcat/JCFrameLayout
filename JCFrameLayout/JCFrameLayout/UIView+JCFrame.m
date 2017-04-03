@@ -143,6 +143,10 @@ static char settedFrameTypesKey;
     }
     return array;
 }
+
+/**
+ 已经设置过得布局属性，通过位运算来组合
+ */
 - (JCFrameType)jc_settedFrameTypes{
     NSNumber *settedFrameTypes = ((NSNumber*)objc_getAssociatedObject(self, &settedFrameTypesKey));
     if (!settedFrameTypes) {
