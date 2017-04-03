@@ -76,7 +76,7 @@
         [array addObject:@{@"title":@"九宫格(相对布局)",@"cls":@"ExampleVC3"}];
         [array addObject:@{@"title":@"五千个方块(绝对布局)",@"cls":@"ExampleVC4"}];
         [array addObject:@{@"title":@"五千个方块(相对布局)",@"cls":@"ExampleVC5"}];
-        [array addObject:@{@"title":@"调试测试",@"cls":@"ExampleVC6"}];
+        [array addObject:@{@"title":@"开发过程测试使用(非Demo)",@"cls":@"DevTest"}];
         
         _datasource = [array copy];
     }

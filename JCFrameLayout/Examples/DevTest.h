@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ExampleVC6 : UIViewController
+@interface DevTest : UIViewController
 
 @end

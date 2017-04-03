@@ -124,7 +124,7 @@ void setCenterByCenterFrame(UIView*view,JCFrame*frame){
                 newCenter = frame.frameAttr.relateView.jc_center_value;
             }
             
-            newCenter = transToNewCenter(frame.frameAttr.relateView.jc_center_value,frame.multiplier,frame.offset);
+            newCenter = transToNewCenter(newCenter,frame.multiplier,frame.offset);
             
             //2. 将新的值回填回去，因为center的value属性赋值
             frame.jc_equalTo(newCenter);

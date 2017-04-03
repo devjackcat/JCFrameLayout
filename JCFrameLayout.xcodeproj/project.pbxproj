@@ -15,7 +15,7 @@
 		2836F3411E8E3DBA00C9BE35 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2836F3401E8E3DBA00C9BE35 /* SecondViewController.m */; };
 		2836F3441E8E3DE900C9BE35 /* ExampleVC1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2836F3431E8E3DE900C9BE35 /* ExampleVC1.m */; };
 		2836F3471E8E438200C9BE35 /* ExampleVC2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2836F3461E8E438200C9BE35 /* ExampleVC2.m */; };
-		2865622F1E8FA0D100707580 /* ExampleVC6.m in Sources */ = {isa = PBXBuildFile; fileRef = 2865622E1E8FA0D100707580 /* ExampleVC6.m */; };
+		2865622F1E8FA0D100707580 /* DevTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2865622E1E8FA0D100707580 /* DevTest.m */; };
 		28D22AE21E8911C9002245F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D22AE11E8911C9002245F9 /* main.m */; };
 		28D22AE51E8911C9002245F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D22AE41E8911C9002245F9 /* AppDelegate.m */; };
 		28D22AE81E8911C9002245F9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D22AE71E8911C9002245F9 /* ViewController.m */; };
@@ -46,8 +46,8 @@
 		2836F3431E8E3DE900C9BE35 /* ExampleVC1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleVC1.m; sourceTree = "<group>"; };
 		2836F3451E8E438200C9BE35 /* ExampleVC2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleVC2.h; sourceTree = "<group>"; };
 		2836F3461E8E438200C9BE35 /* ExampleVC2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleVC2.m; sourceTree = "<group>"; };
-		2865622D1E8FA0D100707580 /* ExampleVC6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleVC6.h; sourceTree = "<group>"; };
-		2865622E1E8FA0D100707580 /* ExampleVC6.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleVC6.m; sourceTree = "<group>"; };
+		2865622D1E8FA0D100707580 /* DevTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevTest.h; sourceTree = "<group>"; };
+		2865622E1E8FA0D100707580 /* DevTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevTest.m; sourceTree = "<group>"; };
 		28D22ADD1E8911C9002245F9 /* JCFrameLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JCFrameLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D22AE11E8911C9002245F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28D22AE31E8911C9002245F9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -118,8 +118,8 @@
 				28F35D701E8E470D0028340C /* ExampleVC4.m */,
 				28F35D721E8E4F2F0028340C /* ExampleVC5.h */,
 				28F35D731E8E4F2F0028340C /* ExampleVC5.m */,
-				2865622D1E8FA0D100707580 /* ExampleVC6.h */,
-				2865622E1E8FA0D100707580 /* ExampleVC6.m */,
+				2865622D1E8FA0D100707580 /* DevTest.h */,
+				2865622E1E8FA0D100707580 /* DevTest.m */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -240,7 +240,7 @@
 			files = (
 				2836F3441E8E3DE900C9BE35 /* ExampleVC1.m in Sources */,
 				28D22AE81E8911C9002245F9 /* ViewController.m in Sources */,
-				2865622F1E8FA0D100707580 /* ExampleVC6.m in Sources */,
+				2865622F1E8FA0D100707580 /* DevTest.m in Sources */,
 				2836F3471E8E438200C9BE35 /* ExampleVC2.m in Sources */,
 				28D22AE51E8911C9002245F9 /* AppDelegate.m in Sources */,
 				28F35D711E8E470D0028340C /* ExampleVC4.m in Sources */,
