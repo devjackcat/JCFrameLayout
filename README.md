@@ -180,7 +180,7 @@ UIView *leftView = [[UIView alloc]init];
 
 相对只能相对于同一个superView或superView进行相，不可跨视图进行。
 
-![](https://github.com/devjackcat/JCFrameLayout/images/image1.png)
+![](https://github.com/devjackcat/JCFrameLayout/blob/master/images/image1.png)
 
 上图中，View1为View2的superView, View2为View3和View4的superView，当需要对View3进行相对布局时，只能相对于View4和View2进行，不能相对于View1进行。
 
